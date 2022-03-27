@@ -1,4 +1,4 @@
-.profile__header {
+.profile__title {
   margin: 0;
   padding: 0;
   font-family: 'Inter';
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width:650px) {
-  .profile__header {
+  .profile__title {
     font-size: 27px;
     line-height: 33px;
     text-align: center;
