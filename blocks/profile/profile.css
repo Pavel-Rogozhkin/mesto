@@ -8,3 +8,9 @@
   position: relative;
   align-items: center;
 }
+
+@media screen and (max-width: 650px) {
+  .profile {
+    flex-direction: column;
+  }
+}

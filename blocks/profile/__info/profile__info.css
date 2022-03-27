@@ -11,3 +11,11 @@
   row-gap: 18px;
   column-gap: 16px;
 }
+
+@media screen and (max-width: 650px) {
+  .profile__info {
+    margin-top: 26px;
+    justify-content: center;
+    max-width: 282px;
+  }
+}
