@@ -1,0 +1,6 @@
+.element__heart {
+  background-image: url("../../../images/Vector_heart.svg");
+  background-color: black;
+  min-width: 22px;
+  min-height: 19px;
+}
