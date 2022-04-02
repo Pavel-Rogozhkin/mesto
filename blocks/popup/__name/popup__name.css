@@ -1,4 +1,4 @@
-.popup__auth_button_name {
+.popup__name {
   margin: 0 auto;
   padding: 0;
   border: 0;
@@ -12,5 +12,4 @@
   letter-spacing: 0em;
   text-align: left;
   color: black;
-  content: "fdsfsdfsdf";
 }
