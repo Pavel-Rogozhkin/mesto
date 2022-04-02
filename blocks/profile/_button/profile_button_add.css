@@ -6,6 +6,8 @@
   width: 150px;
   height: 50px;
   background-image: url("../../../images/Button_add.svg");
+  background-color: #000000;
+  border: 1px solid #ffffff;
 }
 
 @media screen and (max-width: 650px) {
