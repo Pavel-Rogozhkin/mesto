@@ -7,7 +7,7 @@
 
 **GitHub Pages**
 
-* [Ссылка на GitHub Pages]()
+* [Ссылка на GitHub Pages](https://pavel-rogozhkin.github.io/mesto/index.html)
 
 **Figma**
 
