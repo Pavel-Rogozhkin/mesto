@@ -8,7 +8,7 @@ let SubmitButton = document.querySelector(".popup__submit");
 let ProfileTitle = document.querySelector(".profile__title");
 let ProfileDescr = document.querySelector(".profile__description");
 
-function togglePopupWindow {
+function togglePopupWindow () {
   PopupWindow.classList.toggle("popup__active");
   NameInput.value = ProfileTitle.textContent;
   ProfileInput.value = ProfileDescr.textContent; 

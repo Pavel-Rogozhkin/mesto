@@ -1,6 +1,9 @@
 .popup__profile {
   margin: 0 auto;
   padding: 0;
+  margin-top: 30px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -8,6 +11,13 @@
   line-height: 17px;
   letter-spacing: 0em;
   text-align: left;
-  width: 358px;
-  border-bottom: 1px;
+  color: black;
+  min-width: 358px;
+  min-height: 27px;
+}
+
+@media screen and (max-width:650px) {
+  .popup__profile {
+    min-width: 238px;
+  }
 }
