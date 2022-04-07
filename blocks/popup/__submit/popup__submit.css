@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 660px) {
   .popup__submit {
     min-width: 238px;
     min-height: 46px;

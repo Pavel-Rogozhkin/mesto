@@ -16,7 +16,7 @@
   min-height: 27px;
 }
 
-@media screen and (max-width:650px) {
+@media screen and (max-width: 660px) {
   .popup__profile {
     min-width: 238px;
   }
