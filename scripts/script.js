@@ -3,10 +3,9 @@
 let PopupWindow = document.querySelector(".popup");
 let ClosePopup = PopupWindow.querySelector(".popup__close");
 let EditButton = document.querySelector(".profile__button-edit");
-let PopupContent = document.querySelector(".popup__content");
+let PopupForm = document.querySelector(".popup__form");
 let NameInput = document.querySelector(".popup__name");
 let ProfileInput = document.querySelector(".popup__profile");
-let SubmitButton = document.querySelector(".popup__submit");
 let ProfileTitle = document.querySelector(".profile__title");
 let ProfileDescr = document.querySelector(".profile__description");
 
@@ -29,5 +28,4 @@ function SubmitHandler (event) {
 
 EditButton.addEventListener("click", togglePopupWindow);
 ClosePopup.addEventListener("click", togglePopupWindow);
-PopupContent.addEventListener("submit", SubmitHandler);
-SubmitButton.addEventListener("click", SubmitHandler);
+PopupForm.addEventListener("submit", SubmitHandler);
