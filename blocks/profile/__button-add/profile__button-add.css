@@ -1,5 +1,5 @@
 .profile__button-add {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   width: 150px;
   height: 50px;
@@ -12,6 +12,8 @@
   background-size: 22px 22px;
   background-position: center;
   background-repeat: no-repeat;
+  position: absolute;
+  right: 0;
 }
 
 @media screen and (max-width: 660px) {
