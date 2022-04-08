@@ -12,8 +12,7 @@
   background-size: 22px 22px;
   background-position: center;
   background-repeat: no-repeat;
-  position: absolute;
-  right: 0;
+  margin-left: auto;
 }
 
 @media screen and (max-width: 660px) {
