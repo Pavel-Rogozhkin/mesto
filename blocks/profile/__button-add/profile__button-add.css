@@ -1,8 +1,6 @@
 .profile__button-add {
   margin: 0 auto;
   padding: 0;
-  position: absolute;
-  right: 0;
   width: 150px;
   height: 50px;
   background-image: url("../../../images/Button_add.svg");
@@ -16,6 +14,6 @@
     margin-top: 36px;
     position: inherit;
     width: 282px;
-    background-image: url("../../../images/Button_add_mobile.svg");
+    background-size: 282px 50px;
   }
 }
