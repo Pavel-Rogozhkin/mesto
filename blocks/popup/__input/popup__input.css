@@ -16,9 +16,3 @@
   min-width: 358px;
   min-height: 27px;
 }
-
-@media screen and (max-width: 660px) {
-  .popup__input {
-    min-width: 238px;
-  }
-}
