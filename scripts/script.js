@@ -12,13 +12,13 @@ let profileDescr = document.querySelector(".profile__description");
 /*Functions*/ 
 
 function togglePopupWindow () {
-  if (popupWindow.contains("popup_opened")) {
-    popupWindow.classList.toggle("popup_opened");
-  }
-  else {
+  if (!popupWindow.classList.contains("popup_opened")) {
     popupWindow.classList.toggle("popup_opened");
     nameInput.value = profileTitle.textContent;
     profileInput.value = profileDescr.textContent; 
+  }
+  else {
+    popupWindow.classList.toggle("popup_opened");
   }
 }
 
