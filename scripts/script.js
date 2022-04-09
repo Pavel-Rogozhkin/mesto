@@ -1,31 +1,36 @@
 /*Variables*/ 
 
-let PopupWindow = document.querySelector(".popup");
-let ClosePopup = PopupWindow.querySelector(".popup__close");
-let EditButton = document.querySelector(".profile__button-edit");
-let PopupForm = document.querySelector(".popup__form");
-let NameInput = document.querySelector(".popup__form_type_name");
-let ProfileInput = document.querySelector(".popup__form_type_profile");
-let ProfileTitle = document.querySelector(".profile__title");
-let ProfileDescr = document.querySelector(".profile__description");
+let popupWindow = document.querySelector(".popup");
+let closePopup = popupWindow.querySelector(".popup__close");
+let editButton = document.querySelector(".profile__button-edit");
+let popupForm = document.querySelector(".popup__form");
+let nameInput = document.querySelector(".popup__input_type_name");
+let profileInput = document.querySelector(".popup__input_type_profile");
+let profileTitle = document.querySelector(".profile__title");
+let profileDescr = document.querySelector(".profile__description");
 
 /*Functions*/ 
 
 function togglePopupWindow () {
-  PopupWindow.classList.toggle("popup__active");
-  NameInput.value = ProfileTitle.textContent;
-  ProfileInput.value = ProfileDescr.textContent; 
+  if (popupWindow.contains("popup_opened")) {
+    popupWindow.classList.toggle("popup_opened");
+  }
+  else {
+    popupWindow.classList.toggle("popup_opened");
+    nameInput.value = profileTitle.textContent;
+    profileInput.value = profileDescr.textContent; 
+  }
 }
 
 function SubmitHandler (event) {
   event.preventDefault();
-  ProfileTitle.textContent = NameInput.value;
-  ProfileDescr.textContent = ProfileInput.value;
+  profileTitle.textContent = nameInput.value;
+  profileDescr.textContent = profileInput.value;
   togglePopupWindow();
 }
 
 /*Listeners*/ 
 
-EditButton.addEventListener("click", togglePopupWindow);
-ClosePopup.addEventListener("click", togglePopupWindow);
-PopupForm.addEventListener("submit", SubmitHandler);
+editButton.addEventListener("click", togglePopupWindow);
+closePopup.addEventListener("click", togglePopupWindow);
+popupForm.addEventListener("submit", SubmitHandler);
