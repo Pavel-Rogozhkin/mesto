@@ -6,4 +6,10 @@
   background-size: contain;
   border: 0;
   background-repeat: no-repeat;
+  cursor: pointer;
+  transition: opacity 1s linear;
+}
+
+.element__heart:hover {
+  opacity: 0.7;
 }
