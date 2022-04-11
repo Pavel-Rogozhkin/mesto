@@ -128,9 +128,6 @@ elementsList.addEventListener("click", function (event) {
 //  CAERD__LIKE_AND_PHOTO  -----------------------------------------------
 
 elementsList.addEventListener("click", function (event) {
-  console.log(event.target);
-  console.log(event.target.classList);
-  console.log(event.target.classList.value);
   if (event.target.classList.contains("element__photo")) {
     popupPhotoWindow.classList.toggle("popup_opened");
     popupTitle.textContent = event.target.alt;
