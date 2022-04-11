@@ -4,4 +4,7 @@
   background: #FFFFFF;
   border-radius: 10px;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }

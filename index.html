@@ -30,50 +30,7 @@
     </section>
 
     <section class="elements">
-      <ul class="elements__list">
-        <li class="element">
-          <img class="element__photo" src="./images/karachaevsk.jpg" alt="Карачаевск">
-          <div class="element__info">
-            <h2 class="element__title">Карачаевск</h2>
-            <button aria-label="Heart" class="element__heart" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__photo" src="./images/Elbrus.jpg" alt="Гора Эльбрус">
-          <div class="element__info">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button aria-label="Heart" class="element__heart" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__photo" src="./images/Dombay.jpg" alt="Домбай">
-          <div class="element__info">
-            <h2 class="element__title">Домбай</h2>
-            <button aria-label="Heart" class="element__heart" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__photo" src="./images/Elbrus.jpg" alt="Гора Эльбрус">
-          <div class="element__info">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button aria-label="Heart" class="element__heart" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__photo" src="./images/Dombay.jpg" alt="Домбай">
-          <div class="element__info">
-            <h2 class="element__title">Домбай</h2>
-            <button aria-label="Heart" class="element__heart" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__photo" src="./images/karachaevsk.jpg" alt="Карачаевск">
-          <div class="element__info">
-            <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button aria-label="Heart" class="element__heart" type="button"></button>
-          </div>
-        </li>
-      </ul>
+      <ul class="elements__list"></ul>
     </section>
   </main>
   
@@ -81,7 +38,18 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <template class="templateElement">
+    <li class="element">
+      <img class="element__photo" src="/" alt="">
+      <button aria-label="Delete" class="element__delete" type="button"></button>
+      <div class="element__info">
+        <h2 class="element__title"></h2>
+        <button aria-label="Heart" class="element__heart" type="button"></button>
+      </div>
+    </li>
+  </template>
+
+  <div class="popup popup_type_edit">
     <div class="popup__content">
       <button aria-label="Close" class="popup__close" type="button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
@@ -93,7 +61,19 @@
     </div>
   </div>
 
-  <script src="./scripts/script.js"></script>
+  <div class="popup popup_type_add">
+    <div class="popup__content">
+      <button aria-label="Close" class="popup__close popup__close_type_add" type="button"></button>
+      <h3 class="popup__title">Новое место</h3>
+      <form class="popup__form popup__form_type_add" name="popup-form">
+        <input class="popup__input popup__input_type_title" type="text" name="popup-form-title" placeholder="Название">
+        <input class="popup__input popup__input_type_link" type="text" name="popup-form-link" placeholder="Ссылка на картинку">
+        <button aria-label="Save" class="popup__submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
 
+  <script src="./scripts/script.js"></script>
+  
 </body>
 </html>
