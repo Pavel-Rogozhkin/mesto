@@ -2,8 +2,10 @@
 
 const popupWindow = document.querySelector(".popup_type_edit");
 const popupAddWindow = document.querySelector(".popup_type_add");
+const popupPhotoWindow = document.querySelector(".popup_type_photo");
 const closePopup = popupWindow.querySelector(".popup__close");
 const closePopupAdd = popupAddWindow.querySelector(".popup__close_type_add");
+const closePopupPhoto = popupPhotoWindow.querySelector(".popup__close_type_photo");
 const popupForm = document.querySelector(".popup__form");
 const popupAddForm = document.querySelector(".popup__form_type_add");
 const nameInput = document.querySelector(".popup__input_type_name");
@@ -18,7 +20,9 @@ const cardTitle = document.querySelector(".element__title");
 const cardLink = document.querySelector(".element__photo");
 const elementsList = document.querySelector(".elements__list");
 const templateElement = document.querySelector(".templateElement");
-
+const photoButton = elementsList.querySelector(".element_photo");
+const popupTitle = document.querySelector(".popup__title_photo");
+const popupPhoto = document.querySelector(".popup__photo");
 
 // Cards:
 const initialCards = [
@@ -97,12 +101,17 @@ function getElement (item) {
   return cloneElement;
 }
 
+function togglePopupPhotoWindow () {
+  popupPhotoWindow.classList.toggle("popup_opened");
+}
+
 /*Listeners*/ 
 
 editButton.addEventListener("click", togglePopupWindow);
 addButton.addEventListener("click", togglePopupAddWindow);
 closePopup.addEventListener("click", togglePopupWindow);
 closePopupAdd.addEventListener("click", togglePopupAddWindow);
+closePopupPhoto.addEventListener("click", togglePopupPhotoWindow);
 popupForm.addEventListener("submit", submitHandler);
 popupAddForm.addEventListener("submit", submitAddHandler);
 
@@ -116,9 +125,21 @@ elementsList.addEventListener("click", function (event) {
   cardDelete.parentElement.remove();
 });
 
-//  CAERD__LIKE  ---------------------------------------------------------
+//  CAERD__LIKE_AND_PHOTO  -----------------------------------------------
 
 elementsList.addEventListener("click", function (event) {
-  const cardLike = event.target.closest(".element__heart");
-  cardLike.classList.toggle("element__heart_active");
+  console.log(event.target);
+  console.log(event.target.classList);
+  console.log(event.target.classList.value);
+  if (event.target.classList.contains("element__photo")) {
+    popupPhotoWindow.classList.toggle("popup_opened");
+    popupTitle.textContent = event.target.alt;
+    popupPhoto.src = event.target.src;
+    console.log("photo");
+  }
+  if (event.target.classList.contains("element__heart")) {
+    const cardLike = event.target.closest(".element__heart");
+    cardLike.classList.toggle("element__heart_active");
+    console.log("heart");
+  } 
 });
