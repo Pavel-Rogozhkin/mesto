@@ -1,5 +1,4 @@
 /*Variables*/ 
-
 const popupEditProfile = document.querySelector(".popup_type_edit");
 const popupAddWindow = document.querySelector(".popup_type_add");
 const popupPhotoWindow = document.querySelector(".popup_type_photo");
@@ -24,11 +23,9 @@ const photoButton = elementsList.querySelector(".element_photo");
 const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
 
-render();
-
 /*Functions*/ 
-
 function openPopup (popup) {
+  popupAddForm.reset();
   popup.classList.add("popup_opened");
   nameInput.value = profileTitle.textContent;
   profileInput.value = profileDescr.textContent;
@@ -90,7 +87,6 @@ function createCard (item) {
 }
 
 /*Listeners*/ 
-
 editButton.addEventListener("click", () => openPopup(popupEditProfile));
 addButton.addEventListener("click", () => openPopup(popupAddWindow));
 closePopupEdit.addEventListener("click", () => closePopup(popupEditProfile));
@@ -98,3 +94,6 @@ closePopupAdd.addEventListener("click", () => closePopup(popupAddWindow));
 closePopupPhoto.addEventListener("click", () => closePopup(popupPhotoWindow));
 popupForm.addEventListener("submit", submitEditProfileHandler);
 popupAddForm.addEventListener("submit", submitAddHandler);
+
+/*Call Functions*/ 
+render();
