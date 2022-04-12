@@ -21,36 +21,8 @@ const cardLink = document.querySelector(".element__photo");
 const elementsList = document.querySelector(".elements__list");
 const templateElement = document.querySelector(".templateElement");
 const photoButton = elementsList.querySelector(".element_photo");
-const popupTitle = document.querySelector(".popup__title_photo");
+const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
-
-// Cards:
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 render();
 
@@ -85,15 +57,15 @@ function submitAddHandler (event) {
     name: titleInput.value,
     link: linkInput.value
   }
-  elementsList.prepend(...[getElement(newObject)]);
+  elementsList.prepend(...[createCard(newObject)]);
 }
 
 function render() {
-  const html = initialCards.map(getElement);
-  elementsList.append(...html);
+  const card = initialCards.map(createCard);
+  elementsList.append(...card);
 }
 
-function getElement (item) {
+function createCard (item) {
   const cloneElement = templateElement.content.cloneNode(true);
   cloneElement.querySelector(".element__photo").src = item.link;
   cloneElement.querySelector(".element__photo").alt = item.name;
@@ -132,11 +104,9 @@ elementsList.addEventListener("click", function (event) {
     popupPhotoWindow.classList.toggle("popup_opened");
     popupTitle.textContent = event.target.alt;
     popupPhoto.src = event.target.src;
-    console.log("photo");
   }
   if (event.target.classList.contains("element__heart")) {
     const cardLike = event.target.closest(".element__heart");
     cardLike.classList.toggle("element__heart_active");
-    console.log("heart");
   } 
 });
