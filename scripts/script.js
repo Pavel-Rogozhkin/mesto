@@ -1,9 +1,9 @@
 /*Variables*/ 
 
-const popupWindow = document.querySelector(".popup_type_edit");
+const popupEditProfile = document.querySelector(".popup_type_edit");
 const popupAddWindow = document.querySelector(".popup_type_add");
 const popupPhotoWindow = document.querySelector(".popup_type_photo");
-const closePopup = popupWindow.querySelector(".popup__close");
+const closePopupEdit = popupEditProfile.querySelector(".popup__close");
 const closePopupAdd = popupAddWindow.querySelector(".popup__close_type_add");
 const closePopupPhoto = popupPhotoWindow.querySelector(".popup__close_type_photo");
 const popupForm = document.querySelector(".popup__form");
@@ -28,31 +28,28 @@ render();
 
 /*Functions*/ 
 
-function togglePopupWindow () {
-  if (!popupWindow.classList.contains("popup_opened")) {
-    popupWindow.classList.toggle("popup_opened");
-    nameInput.value = profileTitle.textContent;
-    profileInput.value = profileDescr.textContent; 
-  }
-  else {
-    popupWindow.classList.toggle("popup_opened");
-  }
+// nameInput.value = profileTitle.textContent;
+// profileInput.value = profileDescr.textContent; 
+
+function openPopup (popup) {
+  popup.classList.add("popup_opened");
+  console.log(popup);
 }
 
-function togglePopupAddWindow () {
-  popupAddWindow.classList.toggle("popup_opened");
+function closePopup (popup) {
+  popup.classList.remove("popup_opened");
 }
 
-function submitHandler (event) {
+function submitEditProfileHandler (event) {
   event.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileDescr.textContent = profileInput.value;
-  togglePopupWindow();
+  openPopup(popupEditProfile);
 }
 
 function submitAddHandler (event) {
   event.preventDefault();
-  togglePopupAddWindow();
+  closePopup(popupAddWindow);
   const newObject = {
     name: titleInput.value,
     link: linkInput.value
@@ -70,43 +67,35 @@ function createCard (item) {
   cloneElement.querySelector(".element__photo").src = item.link;
   cloneElement.querySelector(".element__photo").alt = item.name;
   cloneElement.querySelector(".element__title").textContent = item.name;
-  return cloneElement;
-}
 
-function togglePopupPhotoWindow () {
-  popupPhotoWindow.classList.toggle("popup_opened");
+  const buttonLike = cloneElement.querySelector(".element__heart");
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle("element__heart_active"); 
+  })
+
+  elementsList.addEventListener("click", function (event) {
+    const cardDelete = event.target.closest(".element__delete");
+    if (!cardDelete) {
+      return;
+    }
+    cardDelete.closest(".element").remove();
+  });
+
+  const buttonPhoto = cloneElement.querySelector(".element__photo");
+  // buttonPhoto.addEventListener("click", openPopup(popupPhotoWindow));
+  
+  return cloneElement;
 }
 
 /*Listeners*/ 
 
-editButton.addEventListener("click", togglePopupWindow);
-addButton.addEventListener("click", togglePopupAddWindow);
-closePopup.addEventListener("click", togglePopupWindow);
-closePopupAdd.addEventListener("click", togglePopupAddWindow);
-closePopupPhoto.addEventListener("click", togglePopupPhotoWindow);
-popupForm.addEventListener("submit", submitHandler);
+editButton.addEventListener("click", openPopup(popupEditProfile));
+addButton.addEventListener("click", openPopup(popupAddWindow));
+closePopupEdit.addEventListener("click", closePopup(popupEditProfile));
+closePopupAdd.addEventListener("click", closePopup(popupAddWindow));
+closePopupPhoto.addEventListener("click", closePopup(popupPhotoWindow));
+popupForm.addEventListener("submit", submitEditProfileHandler);
 popupAddForm.addEventListener("submit", submitAddHandler);
 
-//  CARD__DELETE  --------------------------------------------------------
-
-elementsList.addEventListener("click", function (event) {
-  const cardDelete = event.target.closest(".element__delete");
-  if (!cardDelete) {
-    return;
-  }
-  cardDelete.parentElement.remove();
-});
-
-//  CAERD__LIKE_AND_PHOTO  -----------------------------------------------
-
-elementsList.addEventListener("click", function (event) {
-  if (event.target.classList.contains("element__photo")) {
-    popupPhotoWindow.classList.toggle("popup_opened");
-    popupTitle.textContent = event.target.alt;
-    popupPhoto.src = event.target.src;
-  }
-  if (event.target.classList.contains("element__heart")) {
-    const cardLike = event.target.closest(".element__heart");
-    cardLike.classList.toggle("element__heart_active");
-  } 
-});
+// popupTitle.textContent = event.target.alt;
+// popupPhoto.src = event.target.src;
