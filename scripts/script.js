@@ -28,12 +28,10 @@ render();
 
 /*Functions*/ 
 
-// nameInput.value = profileTitle.textContent;
-// profileInput.value = profileDescr.textContent; 
-
 function openPopup (popup) {
   popup.classList.add("popup_opened");
-  console.log(popup);
+  nameInput.value = profileTitle.textContent;
+  profileInput.value = profileDescr.textContent; 
 }
 
 function closePopup (popup) {
@@ -44,7 +42,7 @@ function submitEditProfileHandler (event) {
   event.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileDescr.textContent = profileInput.value;
-  openPopup(popupEditProfile);
+  closePopup(popupEditProfile);
 }
 
 function submitAddHandler (event) {
@@ -82,20 +80,17 @@ function createCard (item) {
   });
 
   const buttonPhoto = cloneElement.querySelector(".element__photo");
-  // buttonPhoto.addEventListener("click", openPopup(popupPhotoWindow));
+  buttonPhoto.addEventListener("click", () => openPopup(popupPhotoWindow));
   
   return cloneElement;
 }
 
 /*Listeners*/ 
 
-editButton.addEventListener("click", openPopup(popupEditProfile));
-addButton.addEventListener("click", openPopup(popupAddWindow));
-closePopupEdit.addEventListener("click", closePopup(popupEditProfile));
-closePopupAdd.addEventListener("click", closePopup(popupAddWindow));
-closePopupPhoto.addEventListener("click", closePopup(popupPhotoWindow));
+editButton.addEventListener("click", () => openPopup(popupEditProfile));
+addButton.addEventListener("click", () => openPopup(popupAddWindow));
+closePopupEdit.addEventListener("click", () => closePopup(popupEditProfile));
+closePopupAdd.addEventListener("click", () => closePopup(popupAddWindow));
+closePopupPhoto.addEventListener("click", () => closePopup(popupPhotoWindow));
 popupForm.addEventListener("submit", submitEditProfileHandler);
 popupAddForm.addEventListener("submit", submitAddHandler);
-
-// popupTitle.textContent = event.target.alt;
-// popupPhoto.src = event.target.src;
