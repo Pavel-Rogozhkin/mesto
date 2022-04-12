@@ -31,7 +31,7 @@ render();
 function openPopup (popup) {
   popup.classList.add("popup_opened");
   nameInput.value = profileTitle.textContent;
-  profileInput.value = profileDescr.textContent; 
+  profileInput.value = profileDescr.textContent;
 }
 
 function closePopup (popup) {
@@ -80,8 +80,12 @@ function createCard (item) {
   });
 
   const buttonPhoto = cloneElement.querySelector(".element__photo");
-  buttonPhoto.addEventListener("click", () => openPopup(popupPhotoWindow));
-  
+  buttonPhoto.addEventListener("click", function (event) {
+    openPopup(popupPhotoWindow);
+    popupTitle.textContent = event.target.alt;
+    popupPhoto.src = event.target.src;
+  });
+
   return cloneElement;
 }
 
