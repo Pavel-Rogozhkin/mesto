@@ -83,14 +83,14 @@ function createCard (item) {
 
 /*Listeners*/ 
 editButton.addEventListener("click", () => {
-  openPopup(popupEditProfile));
+  openPopup(popupEditProfile);
   nameInput.value = profileTitle.textContent;
   profileInput.value = profileDescr.textContent;
-}
+});
 addButton.addEventListener("click", () => {
-  openPopup(popupAddWindow));
+  openPopup(popupAddWindow);
   popupAddForm.reset();
-}
+});
 closePopupEdit.addEventListener("click", () => closePopup(popupEditProfile));
 closePopupAdd.addEventListener("click", () => closePopup(popupAddWindow));
 closePopupPhoto.addEventListener("click", () => closePopup(popupPhotoWindow));
