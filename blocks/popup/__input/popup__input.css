@@ -18,6 +18,14 @@
   min-height: 27px;
 }
 
+.popup__input:invalid {
+  border: 1px solid red; /* красная рамка для некорректных данных */
+} 
+
+.popup__input:valid {
+  border: 1px solid green; /* зелёная - для корректных */
+} 
+
 @media screen and (max-width: 660px) {
   .popup__input {
     min-width: 238px;
