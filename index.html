@@ -53,9 +53,11 @@
     <div class="popup__content">
       <button aria-label="Close" class="popup__close" type="button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form class="popup__form" name="popup-form">
-        <input class="popup__input popup__input_type_name" type="text" name="popup-form-name" placeholder="Имя">
-        <input class="popup__input popup__input_type_profile" type="text" name="popup-form-profile" placeholder="Профессия">
+      <form class="popup__form" name="popup-form" novalidate>
+        <input id="name-input" class="popup__input popup__input_type_name" type="text" name="popup-form-name" placeholder="Имя">
+        <span class="name-input-error form__input-error">Необходимо заполнить данное поле</span> 
+        <input id="profile-input" class="popup__input popup__input_type_profile" type="text" name="popup-form-profile" placeholder="Профессия">
+        <span class="profile-input-error form__input-error">Необходимо заполнить данное поле</span> 
         <button aria-label="Save" class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
@@ -65,9 +67,11 @@
     <div class="popup__content">
       <button aria-label="Close" class="popup__close popup__close_type_add" type="button"></button>
       <h3 class="popup__title">Новое место</h3>
-      <form class="popup__form popup__form_type_add" name="popup-form">
-        <input class="popup__input popup__input_type_title" type="text" name="popup-form-title" placeholder="Название">
-        <input class="popup__input popup__input_type_link" type="URL" name="popup-form-link" placeholder="Ссылка на картинку">
+      <form class="popup__form popup__form_type_add" name="popup-form" novalidate>
+        <input id="title-input" class="popup__input popup__input_type_title" type="text" name="popup-form-title" placeholder="Название">
+        <span class="title-input-error form__input-error">Необходимо заполнить данное поле</span> 
+        <input id="link-input" class="popup__input popup__input_type_link" type="URL" name="popup-form-link" placeholder="Ссылка на картинку">
+        <span class="link-input-error form__input-error">Необходимо заполнить данное поле</span> 
         <button aria-label="Save" class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
