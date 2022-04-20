@@ -22,7 +22,7 @@ const photoButton = elementsList.querySelector(".element_photo");
 const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
 const popupForm = document.querySelector(".popup__form");
-const formInput = popupForm.querySelector('.form__input');
+const formInput = popupForm.querySelector('.popup__input');
 
 /*Functions*/ 
 function openPopup (popup) {
@@ -124,10 +124,57 @@ const isValid = () => {
   }
 };
  
-popupForm.addEventListener('submit', function (evt) {
-  // Отменим стандартное поведение по сабмиту
-  evt.preventDefault();
-});
+// popupForm.addEventListener('submit', function (evt) {
+//   // Отменим стандартное поведение по сабмиту
+//   evt.preventDefault();
+// });
 
-// Вызовем функцию isValid на каждый ввод символа
-formInput.addEventListener('input', isValid); 
+
+// // Вызовем функцию isValid на каждый ввод символа
+// formInput.addEventListener('input', function (evt) {
+//   // Выведем в консоль значение свойства validity.valid поля ввода, 
+//   // на котором слушаем событие input
+//   console.log(evt.target.validity.valid);
+// }); 
+
+
+const setEventListeners = (formElement) => {
+  // Находим все поля внутри формы,
+  // сделаем из них массив методом Array.from
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+
+  // Обойдём все элементы полученной коллекции
+  inputList.forEach((inputElement) => {
+    // каждому полю добавим обработчик события input
+    inputElement.addEventListener('input', () => {
+      // Внутри колбэка вызовем isValid,
+      // передав ей форму и проверяемый элемент
+      isValid(formElement, inputElement)
+    });
+  });
+}; 
+
+
+
+const enableValidation = () => {
+  // Найдём все формы с указанным классом в DOM,
+  // сделаем из них массив методом Array.from
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+
+  // Переберём полученную коллекцию
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      // У каждой формы отменим стандартное поведение
+      evt.preventDefault();
+    });
+
+    // Для каждой формы вызовем функцию setEventListeners,
+    // передав ей элемент формы
+    setEventListeners(formElement);
+  });
+};
+
+// Вызовем функцию
+enableValidation(); 
+
+
