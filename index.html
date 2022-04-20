@@ -54,9 +54,9 @@
       <button aria-label="Close" class="popup__close" type="button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form" name="popup-form" novalidate>
-        <input id="name-input" class="popup__input popup__input_type_name" type="text" name="popup-form-name" placeholder="Имя">
+        <input id="name-input" class="popup__input popup__input_type_name" type="text" name="popup-form-name" placeholder="Имя" required>
         <span class="name-input-error popup__form_input-error">Необходимо заполнить данное поле</span> 
-        <input id="profile-input" class="popup__input popup__input_type_profile" type="text" name="popup-form-profile" placeholder="Профессия">
+        <input id="profile-input" class="popup__input popup__input_type_profile" type="text" name="popup-form-profile" placeholder="Профессия" required>
         <span class="profile-input-error popup__form_input-error">Необходимо заполнить данное поле</span> 
         <button aria-label="Save" class="popup__submit" type="submit">Сохранить</button>
       </form>
@@ -68,9 +68,9 @@
       <button aria-label="Close" class="popup__close popup__close_type_add" type="button"></button>
       <h3 class="popup__title">Новое место</h3>
       <form class="popup__form popup__form_type_add" name="popup-form" novalidate>
-        <input id="title-input" class="popup__input popup__input_type_title" type="text" name="popup-form-title" placeholder="Название">
+        <input id="title-input" class="popup__input popup__input_type_title" type="text" name="popup-form-title" placeholder="Название" required>
         <span class="title-input-error popup__form_input-error">Вы пропустили это поле.</span> 
-        <input id="link-input" class="popup__input popup__input_type_link" type="URL" name="popup-form-link" placeholder="Ссылка на картинку">
+        <input id="link-input" class="popup__input popup__input_type_link" type="URL" name="popup-form-link" placeholder="Ссылка на картинку" required>
         <span class="link-input-error popup__form_input-error">Введите адрес сайта.</span> 
         <button aria-label="Save" class="popup__submit" type="submit">Сохранить</button>
       </form>

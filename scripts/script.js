@@ -5,7 +5,6 @@ const popupPhotoWindow = document.querySelector(".popup_type_photo");
 const closePopupEdit = popupEditProfile.querySelector(".popup__close");
 const closePopupAdd = popupAddWindow.querySelector(".popup__close_type_add");
 const closePopupPhoto = popupPhotoWindow.querySelector(".popup__close_type_photo");
-const popupForm = document.querySelector(".popup__form");
 const popupAddForm = document.querySelector(".popup__form_type_add");
 const nameInput = document.querySelector(".popup__input_type_name");
 const profileInput = document.querySelector(".popup__input_type_profile");
@@ -22,6 +21,8 @@ const templateElement = document.querySelector(".templateElement");
 const photoButton = elementsList.querySelector(".element_photo");
 const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
+const popupForm = document.querySelector(".popup__form");
+const formInput = popupForm.querySelector('.form__input');
 
 /*Functions*/ 
 function openPopup (popup) {
@@ -99,3 +100,34 @@ popupAddForm.addEventListener("submit", submitAddHandler);
 
 /*Call Functions*/ 
 render();
+
+/*SPRINT_6*/
+
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (element) => {
+  element.classList.add('popup__input_type_error');
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (element) => {
+  element.classList.remove('popup__input_type_error');
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = () => {
+  if (!formInput.validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(formInput);
+  } else {
+    // Если проходит, скроем
+    hideInputError(formInput);
+  }
+};
+ 
+popupForm.addEventListener('submit', function (evt) {
+  // Отменим стандартное поведение по сабмиту
+  evt.preventDefault();
+});
+
+// Вызовем функцию isValid на каждый ввод символа
+formInput.addEventListener('input', isValid); 
