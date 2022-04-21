@@ -5,6 +5,7 @@ const popupPhotoWindow = document.querySelector(".popup_type_photo");
 const closePopupEdit = popupEditProfile.querySelector(".popup__close");
 const closePopupAdd = popupAddWindow.querySelector(".popup__close_type_add");
 const closePopupPhoto = popupPhotoWindow.querySelector(".popup__close_type_photo");
+const popupEditForm = document.querySelector(".popup__form_type_add");
 const popupAddForm = document.querySelector(".popup__form_type_add");
 const nameInput = document.querySelector(".popup__input_type_name");
 const profileInput = document.querySelector(".popup__input_type_profile");
@@ -21,8 +22,6 @@ const templateElement = document.querySelector(".templateElement");
 const photoButton = elementsList.querySelector(".element_photo");
 const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
-const popupForm = document.querySelector(".popup__form");
-const formInput = popupForm.querySelector('.popup__input');
 
 /*Functions*/ 
 function openPopup (popup) {
@@ -95,7 +94,7 @@ addButton.addEventListener("click", () => {
 closePopupEdit.addEventListener("click", () => closePopup(popupEditProfile));
 closePopupAdd.addEventListener("click", () => closePopup(popupAddWindow));
 closePopupPhoto.addEventListener("click", () => closePopup(popupPhotoWindow));
-popupForm.addEventListener("submit", submitEditProfileHandler);
+popupEditForm.addEventListener("submit", submitEditProfileHandler);
 popupAddForm.addEventListener("submit", submitAddHandler);
 
 /*Call Functions*/ 
@@ -103,52 +102,57 @@ render();
 
 /*SPRINT_6*/
 
-const showInputError = (popupForm, formInput, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage) => {
   // Находим элемент ошибки внутри самой функции
-  console.log(`.${formInput.id}-error`);
-  const errorElement = popupForm.querySelector(`.${formInput.id}-error`);
+  console.log(inputElement);
+  // console.log(`.${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Остальной код такой же
-  formInput.classList.add('popup__input_type_error');
-  errorElement.classList.add('form__input-error_active');
+  inputElement.classList.add('popup__input_type_error');
+  errorElement.classList.add('popup__form_input-error_active');
   errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (popupForm, formInput) => {
+const hideInputError = (formElement, inputElement) => {
   // Находим элемент ошибки
-  console.log(`.${formInput.id}-error`);
-  const errorElement = popupForm.querySelector(`.${formInput.id}-error`);
+  console.log(inputElement);
+  // console.log(`.${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Остальной код такой же
-  formInput.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('form__input-error_active');
+  inputElement.classList.remove('popup__input_type_error');
+  errorElement.classList.remove('popup__form_input-error_active');
   errorElement.textContent = '';
 }; 
 
-// Функция isValid теперь принимает formElement и formInput,
+// Функция isValid теперь принимает formElement и inputElement,
 // а не берёт их из внешней области видимости
-const isValid = (popupForm, formInput) => {
-  if (!formInput.validity.valid) {
+const isValid = (formElement, inputElement) => {
+  console.log(inputElement);
+  // console.log(!inputElement.validity.valid);
+  if (!inputElement.validity.valid) {
     // showInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
-    showInputError(popupForm, formInput, formInput.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     // hideInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
-    hideInputError(popupForm);
+    hideInputError(formElement, inputElement);
   }
 }; 
 
-const setEventListeners = (popupForm) => {
+const setEventListeners = (formElement) => {
   // Находим все поля внутри формы,
   // сделаем из них массив методом Array.from
-  const inputList = Array.from(popupForm.querySelectorAll('.popup__input'));
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
 
   // Обойдём все элементы полученной коллекции
-  inputList.forEach((formInput) => {
+  inputList.forEach((inputElement) => {
+    // console.log(inputElement);
     // каждому полю добавим обработчик события input
-    formInput.addEventListener('input', () => {
+    inputElement.addEventListener('input', () => {
       // Внутри колбэка вызовем isValid,
       // передав ей форму и проверяемый элемент
-      isValid(popupForm, formInput);
+      isValid(formElement, inputElement);
     });
   });
 }; 
@@ -159,15 +163,15 @@ const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
 
   // Переберём полученную коллекцию
-  formList.forEach((popupForm) => {
-    popupForm.addEventListener('submit', (evt) => {
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
       // У каждой формы отменим стандартное поведение
       evt.preventDefault();
     });
 
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
-    setEventListeners(popupForm);
+    setEventListeners(formElement);
   });
 };
 
