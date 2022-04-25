@@ -177,3 +177,27 @@ const enableValidation = () => {
 
 // Вызовем функцию
 enableValidation();
+
+
+function closeOpenedPopup () {
+  
+}
+
+//--------------
+document.addEventListener('keydown', function (evt) {
+  if (evt.key == "Escape") {
+    const popupOpened = document.querySelector(".popup_opened");
+    if (!(popupOpened === null)) {
+      closePopup(popupOpened);
+    };
+  };
+}); 
+//----------
+//-----
+document.addEventListener("mousedown", function (evt) {
+  const popupOpened = document.querySelector(".popup_opened");
+  if (evt.target.classList.contains("popup")) {
+    closePopup(popupOpened);
+  }
+});
+//-------
