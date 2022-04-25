@@ -18,13 +18,13 @@
   min-height: 27px;
 }
 
-.popup__input:invalid {
-  border: 1px solid red; /* красная рамка для некорректных данных */
+/* .popup__input:invalid {
+  border: 1px solid red;
 } 
 
 .popup__input:valid {
-  border: 1px solid green; /* зелёная - для корректных */
-} 
+  border: 1px solid green;
+}  */
 
 @media screen and (max-width: 660px) {
   .popup__input {

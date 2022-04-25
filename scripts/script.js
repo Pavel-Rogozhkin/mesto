@@ -5,7 +5,7 @@ const popupPhotoWindow = document.querySelector(".popup_type_photo");
 const closePopupEdit = popupEditProfile.querySelector(".popup__close");
 const closePopupAdd = popupAddWindow.querySelector(".popup__close_type_add");
 const closePopupPhoto = popupPhotoWindow.querySelector(".popup__close_type_photo");
-const popupEditForm = document.querySelector(".popup__form_type_add");
+const popupEditForm = document.querySelector(".popup__form_type_edit");
 const popupAddForm = document.querySelector(".popup__form_type_add");
 const nameInput = document.querySelector(".popup__input_type_name");
 const profileInput = document.querySelector(".popup__input_type_profile");
@@ -39,7 +39,7 @@ function submitEditProfileHandler (event) {
   closePopup(popupEditProfile);
 }
 
-function submitAddHandler (event) {
+function submitAddCardHandler (event) {
   event.preventDefault();
   closePopup(popupAddWindow);
   const newObject = {
@@ -78,6 +78,22 @@ function createCard (item) {
     popupPhoto.alt = event.target.alt;
   });
 
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key == "Escape") {
+      const popupOpened = document.querySelector(".popup_opened");
+      if (!(popupOpened === null)) {
+        closePopup(popupOpened);
+      };
+    };
+  }); 
+
+  document.addEventListener("mousedown", function (evt) {
+    const popupOpened = document.querySelector(".popup_opened");
+    if (evt.target.classList.contains("popup")) {
+      closePopup(popupOpened);
+    }
+  });
+
   return cloneElement;
 }
 
@@ -95,109 +111,49 @@ closePopupEdit.addEventListener("click", () => closePopup(popupEditProfile));
 closePopupAdd.addEventListener("click", () => closePopup(popupAddWindow));
 closePopupPhoto.addEventListener("click", () => closePopup(popupPhotoWindow));
 popupEditForm.addEventListener("submit", submitEditProfileHandler);
-popupAddForm.addEventListener("submit", submitAddHandler);
+popupAddForm.addEventListener("submit", submitAddCardHandler);
 
-/*Call Functions*/ 
 render();
 
-/*SPRINT_6*/
-
 const showInputError = (formElement, inputElement, errorMessage) => {
-  // Находим элемент ошибки внутри самой функции
-  console.log(inputElement);
-  // console.log(`.${inputElement.id}-error`);
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  // Остальной код такой же
   inputElement.classList.add('popup__input_type_error');
   errorElement.classList.add('popup__form_input-error_active');
   errorElement.textContent = errorMessage;
 };
 
 const hideInputError = (formElement, inputElement) => {
-  // Находим элемент ошибки
-  console.log(inputElement);
-  // console.log(`.${inputElement.id}-error`);
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  // Остальной код такой же
   inputElement.classList.remove('popup__input_type_error');
   errorElement.classList.remove('popup__form_input-error_active');
   errorElement.textContent = '';
 }; 
 
-// Функция isValid теперь принимает formElement и inputElement,
-// а не берёт их из внешней области видимости
 const isValid = (formElement, inputElement) => {
-  console.log(inputElement);
-  // console.log(!inputElement.validity.valid);
   if (!inputElement.validity.valid) {
-    // showInputError теперь получает параметром форму, в которой
-    // находится проверяемое поле, и само это поле
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    // hideInputError теперь получает параметром форму, в которой
-    // находится проверяемое поле, и само это поле
     hideInputError(formElement, inputElement);
   }
 }; 
 
 const setEventListeners = (formElement) => {
-  // Находим все поля внутри формы,
-  // сделаем из них массив методом Array.from
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-
-  // Обойдём все элементы полученной коллекции
   inputList.forEach((inputElement) => {
-    // console.log(inputElement);
-    // каждому полю добавим обработчик события input
     inputElement.addEventListener('input', () => {
-      // Внутри колбэка вызовем isValid,
-      // передав ей форму и проверяемый элемент
       isValid(formElement, inputElement);
     });
   });
 }; 
 
 const enableValidation = () => {
-  // Найдём все формы с указанным классом в DOM,
-  // сделаем из них массив методом Array.from
   const formList = Array.from(document.querySelectorAll('.popup__form'));
-
-  // Переберём полученную коллекцию
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
-      // У каждой формы отменим стандартное поведение
       evt.preventDefault();
     });
-
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
     setEventListeners(formElement);
   });
 };
 
-// Вызовем функцию
 enableValidation();
-
-
-function closeOpenedPopup () {
-  
-}
-
-//--------------
-document.addEventListener('keydown', function (evt) {
-  if (evt.key == "Escape") {
-    const popupOpened = document.querySelector(".popup_opened");
-    if (!(popupOpened === null)) {
-      closePopup(popupOpened);
-    };
-  };
-}); 
-//----------
-//-----
-document.addEventListener("mousedown", function (evt) {
-  const popupOpened = document.querySelector(".popup_opened");
-  if (evt.target.classList.contains("popup")) {
-    closePopup(popupOpened);
-  }
-});
-//-------
