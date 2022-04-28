@@ -19,7 +19,16 @@ function toggleSubmit(form, config) {
   submit.classList.toggle("popup__submit_type_disabled", !form.checkValidity());
 }
 
-function handleFormSubmit(event, form, config) {
+function handleFormSubmit(event, form) {
+  event.preventDefault();
+  if (form.checkValidity()){
+    alert("Form Valid!");
+  } else {
+    alert("Form Invalid!");
+  }
+}
+
+function handleFormInput(event, form, config) {
   const input = event.target;
   const errorNode = document.querySelector("#${input.id}-error");
   if (input.validity.valid) {
