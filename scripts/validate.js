@@ -1,22 +1,25 @@
 const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
-  submitSelector: ".popup__submit"
+  buttonSelector: ".popup__submit",
 }
 
-function enableValidation() {
+function enableValidation(config) {
   const form = document.querySelector(config.formSelector);
   const inputs = form.querySelectorAll(config.inputSelector);
-  addInputListener(inputs, form, config);
+  inputs.forEach((element) => {
+    element.addEventListener("input", (event) => handleFormInput(event, form, config));
+  });
   form.addEventListener("submit", (event) => handleFormSubmit(event, form));
   form.addEventListener("input", handleFormInput);
-  toggleSubmit(form, config);
+  toggleButton(form, config);
 }
 
-function toggleSubmit(form, config) {
-  const submit = document.querySelector(config.submitSelector);
-  submit.disabled = !form.checkValidity();
-  submit.classList.toggle("popup__submit_type_disabled", !form.checkValidity());
+function toggleButton(form, config) {
+  console.log(config.buttonSelector);
+  const button = document.querySelector(config.buttonSelector);
+  button.disabled = !form.checkValidity();
+  button.classList.toggle("popup__submit_type_disabled", !form.checkValidity());
 }
 
 function handleFormSubmit(event, form) {
@@ -30,11 +33,17 @@ function handleFormSubmit(event, form) {
 
 function handleFormInput(event, form, config) {
   const input = event.target;
-  const errorNode = document.querySelector("#${input.id}-error");
+  const errorNode = document.querySelector(`.${input.id}-error`);
   if (input.validity.valid) {
     errorNode.textContent = "";
+    input.classList.remove('popup__input_type_error');
+    errorNode.classList.remove('popup__form_input-error_active');
   } else {
     errorNode.textContent = input.validationMessege;
+    input.classList.add('popup__input_type_error');
+    errorNode.classList.add('popup__form_input-error_active');
   }
-  toggleSubmit(form, config);
+  toggleButton(form, config);
 }
+
+enableValidation(config);
