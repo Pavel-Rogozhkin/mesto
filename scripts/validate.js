@@ -12,11 +12,12 @@ function enableValidation(config) {
   });
   form.addEventListener("submit", (event) => handleFormSubmit(event, form));
   form.addEventListener("input", handleFormInput);
+  console.log(config.buttonSelector);
   toggleButton(form, config);
 }
 
 function toggleButton(form, config) {
-  console.log(config.buttonSelector);
+  // console.log(config.buttonSelector);
   const button = document.querySelector(config.buttonSelector);
   button.disabled = !form.checkValidity();
   button.classList.toggle("popup__submit_type_disabled", !form.checkValidity());
