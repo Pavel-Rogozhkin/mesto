@@ -11,7 +11,6 @@ function enableValidation(config) {
     element.addEventListener("input", (event) => handleFormInput(event, form, config));
   });
   form.addEventListener("submit", (event) => handleFormSubmit(event, form));
-  form.addEventListener("input", handleFormInput);
   toggleButton(form, config);
 }
 
