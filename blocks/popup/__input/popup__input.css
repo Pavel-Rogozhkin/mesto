@@ -1,7 +1,7 @@
 .popup__input {
   outline: unset;
   margin: 0;
-  margin-top: 13px;
+  margin-top: 30px;
   padding: 0;
   padding-bottom: 13px;
   border: 0;
@@ -17,14 +17,6 @@
   min-width: 358px;
   min-height: 27px;
 }
-
-/* .popup__input:invalid {
-  border: 1px solid red;
-} 
-
-.popup__input:valid {
-  border: 1px solid green;
-}  */
 
 @media screen and (max-width: 660px) {
   .popup__input {

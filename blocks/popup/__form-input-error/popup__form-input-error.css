@@ -1,11 +1,9 @@
 .popup__form-input-error {
-  /* position: absolute; */
-  top: 0;
   margin: 0;
   padding: 0;
-  padding-top: 5px;
-  width: 164px;
-  height: 12px;
+  /* padding-top: -19px; */
+  width: 100%;
+  height: 19px;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;

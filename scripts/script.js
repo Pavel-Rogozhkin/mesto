@@ -28,6 +28,7 @@ function openPopup (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEsc);
   document.addEventListener("mousedown", closeByOverlay);
+  enableValidation(config);
 }
 
 function closePopup (popup) {
