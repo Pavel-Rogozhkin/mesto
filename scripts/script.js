@@ -61,8 +61,8 @@ function render() {
 
 function closeByEsc(evt) {
   if (evt.key === "Escape") {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup); 
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened); 
   };
 };
 
@@ -85,10 +85,10 @@ function createCard (item) {
     buttonLike.classList.toggle("element__heart_active"); 
   })
 
-  cardsContainer.addEventListener("click", function (event) {
-    const cardDelete = event.target.closest(".element__delete");
-    cardDelete.closest(".element").remove();
-  });
+  // cardsContainer.addEventListener("click", function (event) {
+  //   const cardDelete = event.target.closest(".element__delete");
+  //   cardDelete.closest(".element").remove();
+  // });
 
   const buttonPhoto = cloneElement.querySelector(".element__photo");
   buttonPhoto.addEventListener("click", function (event) {
@@ -118,3 +118,4 @@ popupEditForm.addEventListener("submit", submitEditProfileHandler);
 popupAddForm.addEventListener("submit", submitAddCardHandler);
 
 render();
+

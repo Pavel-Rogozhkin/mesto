@@ -8,12 +8,14 @@ const config = {
 function enableValidation(config) {
   const popupOpened = document.querySelector(config.popupOpened);
   const form = popupOpened.querySelector(config.formSelector);
-  const inputs = form.querySelectorAll(config.inputSelector);
-  inputs.forEach((element) => {
-    element.addEventListener("input", (event) => handleFormInput(event, form, config));
-  });
-  form.addEventListener("submit", (event) => handleFormSubmit(event));
-  toggleButton(form, config);
+  if (form) {
+    const inputs = form.querySelectorAll(config.inputSelector);
+    inputs.forEach((element) => {
+      element.addEventListener("input", (event) => handleFormInput(event, form, config));
+    });
+    form.addEventListener("submit", (event) => handleFormSubmit(event));
+    toggleButton(form, config);
+  }
 }
 
 function toggleButton(form, config) {
