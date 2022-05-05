@@ -52,12 +52,12 @@ function submitEditProfileHandler (event) {
 
 function submitAddCardHandler (event) {
   event.preventDefault();
-  closePopup(popupAddWindow);
   const newObject = {
     name: titleInput.value,
     link: linkInput.value
   }
   cardsContainer.prepend(...[createCard(newObject)]);
+  closePopup(popupAddWindow);
 }
 
 function render() {

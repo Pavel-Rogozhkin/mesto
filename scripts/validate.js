@@ -1,26 +1,25 @@
 function enableValidation(config) {
-  const popupOpened = document.querySelector(config.popupOpened);
-  if (popupOpened) {
-    const form = popupOpened.querySelector(config.formSelector);
+  const forms = document.querySelectorAll(config.formSelector);
+  forms.forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+    const inputs = form.querySelectorAll(config.inputSelector);
+    inputs.forEach((input) => {
+      input.addEventListener("input", (event) => handleFormInput(event, form, config));
+    });
     const button = form.querySelector(config.buttonSelector);
-    if (form) {
-      const inputs = form.querySelectorAll(config.inputSelector);
-      inputs.forEach((element) => {
-        element.addEventListener("input", (event) => handleFormInput(event, form, config));
-      });
-      form.addEventListener("submit", (event) => handleFormSubmit(event));
+    console.log(button);
+    // buttons.forEach((button) => {
       toggleButton(form, button);
-    }
-  }
+    // });
+  });
 }
 
 function toggleButton(form, button) {
+  console.log(button);
   button.disabled = !form.checkValidity();
   button.classList.toggle("popup__submit_type_disabled", !form.checkValidity());
-}
-
-function handleFormSubmit(event) {
-  event.preventDefault();
 }
 
 function handleFormInput(event, form, config) {
@@ -35,7 +34,8 @@ function handleFormInput(event, form, config) {
     input.classList.add('popup__input_type_error');
     errorNode.classList.add('popup__form-input-error');
   }
-  toggleButton(form, config);
+  const button = form.querySelector(config.buttonSelector);
+  toggleButton(form, button);
 }
 
 enableValidation(config);
