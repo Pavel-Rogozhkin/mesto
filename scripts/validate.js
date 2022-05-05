@@ -1,25 +1,20 @@
-const config = {
-  popupOpened: ".popup_opened",
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  buttonSelector: ".popup__submit",
-}
-
 function enableValidation(config) {
   const popupOpened = document.querySelector(config.popupOpened);
-  const form = popupOpened.querySelector(config.formSelector);
-  if (form) {
-    const inputs = form.querySelectorAll(config.inputSelector);
-    inputs.forEach((element) => {
-      element.addEventListener("input", (event) => handleFormInput(event, form, config));
-    });
-    form.addEventListener("submit", (event) => handleFormSubmit(event));
-    toggleButton(form, config);
+  if (popupOpened) {
+    const form = popupOpened.querySelector(config.formSelector);
+    const button = form.querySelector(config.buttonSelector);
+    if (form) {
+      const inputs = form.querySelectorAll(config.inputSelector);
+      inputs.forEach((element) => {
+        element.addEventListener("input", (event) => handleFormInput(event, form, config));
+      });
+      form.addEventListener("submit", (event) => handleFormSubmit(event));
+      toggleButton(form, button);
+    }
   }
 }
 
-function toggleButton(form, config) {
-  const button = form.querySelector(config.buttonSelector);
+function toggleButton(form, button) {
   button.disabled = !form.checkValidity();
   button.classList.toggle("popup__submit_type_disabled", !form.checkValidity());
 }
@@ -42,3 +37,5 @@ function handleFormInput(event, form, config) {
   }
   toggleButton(form, config);
 }
+
+enableValidation(config);

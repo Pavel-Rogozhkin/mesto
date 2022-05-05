@@ -23,18 +23,24 @@ const photoButton = cardsContainer.querySelector(".element_photo");
 const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
 
+const config = {
+  popupOpened: ".popup_opened",
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  buttonSelector: ".popup__submit",
+}
+
 /*Functions*/ 
 function openPopup (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEsc);
-  document.addEventListener("mousedown", closeByOverlay);
-  enableValidation(config);
+  popup.addEventListener("mousedown", closeByOverlay);
 }
 
 function closePopup (popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closeByEsc);
-  document.removeEventListener("mousedown", closeByOverlay);
+  popup.removeEventListener("mousedown", closeByOverlay);
 }
 
 function submitEditProfileHandler (event) {
@@ -67,9 +73,8 @@ function closeByEsc(evt) {
 };
 
 function closeByOverlay(evt) {
-  const popupOpened = document.querySelector(".popup_opened");
   if (evt.target.classList.contains("popup")) {
-    closePopup(popupOpened);
+    closePopup(evt.target);
   };
 };
 
@@ -85,10 +90,10 @@ function createCard (item) {
     buttonLike.classList.toggle("element__heart_active"); 
   })
 
-  // cardsContainer.addEventListener("click", function (event) {
-  //   const cardDelete = event.target.closest(".element__delete");
-  //   cardDelete.closest(".element").remove();
-  // });
+  const cardDelete = cloneElement.querySelector(".element__delete");
+  cardDelete.addEventListener('click', () => {
+    cardDelete.closest(".element").remove();
+  })
 
   const buttonPhoto = cloneElement.querySelector(".element__photo");
   buttonPhoto.addEventListener("click", function (event) {
@@ -118,4 +123,3 @@ popupEditForm.addEventListener("submit", submitEditProfileHandler);
 popupAddForm.addEventListener("submit", submitAddCardHandler);
 
 render();
-

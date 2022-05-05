@@ -5,4 +5,9 @@
   box-sizing: border-box;
   border-radius: 2px;
   opacity: 0.2;
+  cursor: default;
+}
+
+.popup__submit:hover {
+  opacity: 0.2;
 }
