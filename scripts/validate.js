@@ -4,38 +4,47 @@ function enableValidation(config) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-    const inputs = form.querySelectorAll(config.inputSelector);
-    inputs.forEach((input) => {
-      input.addEventListener("input", (event) => handleFormInput(event, form, config));
-    });
-    const button = form.querySelector(config.buttonSelector);
-    console.log(button);
-    // buttons.forEach((button) => {
-      toggleButton(form, button);
-    // });
+    setEventListeners(form, config);
   });
-}
+};
+
+function setEventListeners(form, config) {
+  const inputs = form.querySelectorAll(config.inputSelector);
+  const button = form.querySelector(config.buttonSelector);
+  inputs.forEach((input) => {
+    input.addEventListener("input", (event) => {
+      handleFormInput(event, config);
+      toggleButton(form, button);
+    });
+  });
+  toggleButton(form, button);
+};
 
 function toggleButton(form, button) {
-  console.log(button);
   button.disabled = !form.checkValidity();
-  button.classList.toggle("popup__submit_type_disabled", !form.checkValidity());
-}
+  button.classList.toggle(config.submitDisabled, !form.checkValidity());
+};
 
-function handleFormInput(event, form, config) {
+function showInputError(config, input, errorNode) {
+  errorNode.textContent = input.validationMessage;
+  input.classList.add(config.inputError);
+  errorNode.classList.add(config.formError);
+};
+
+function hideInputError(config, input, errorNode) {
+  errorNode.textContent = "";
+  input.classList.remove(config.inputError);
+  errorNode.classList.remove(config.formError);
+};
+
+function handleFormInput(event, config) {
   const input = event.target;
   const errorNode = document.querySelector(`.${input.id}-error`);
   if (input.validity.valid) {
-    errorNode.textContent = "";
-    input.classList.remove('popup__input_type_error');
-    errorNode.classList.remove('popup__form-input-error');
+    hideInputError(config, input, errorNode);
   } else {
-    errorNode.textContent = input.validationMessage;
-    input.classList.add('popup__input_type_error');
-    errorNode.classList.add('popup__form-input-error');
-  }
-  const button = form.querySelector(config.buttonSelector);
-  toggleButton(form, button);
-}
+    showInputError(config, input, errorNode);
+  };
+};
 
 enableValidation(config);

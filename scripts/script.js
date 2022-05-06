@@ -1,4 +1,3 @@
-/*Variables*/ 
 const popupEditProfile = document.querySelector(".popup_type_edit");
 const popupAddWindow = document.querySelector(".popup_type_add");
 const popupPhotoWindow = document.querySelector(".popup_type_photo");
@@ -28,9 +27,11 @@ const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   buttonSelector: ".popup__submit",
+  submitDisabled: "popup__submit_type_disabled",
+  inputError: "popup__input_type_error",
+  formError: "popup__form-input-error",
 }
 
-/*Functions*/ 
 function openPopup (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEsc);
@@ -106,7 +107,6 @@ function createCard (item) {
   return cloneElement;
 }
 
-/*Listeners*/ 
 buttonEdit.addEventListener("click", () => {
   nameInput.value = profileTitle.textContent;
   profileInput.value = profileDescr.textContent;
