@@ -14,13 +14,13 @@ function setEventListeners(form, config) {
   inputs.forEach((input) => {
     input.addEventListener("input", (event) => {
       handleFormInput(event, config);
-      toggleButton(form, button);
+      toggleButton(form, button, config);
     });
   });
-  toggleButton(form, button);
+  toggleButton(form, button, config);
 };
 
-function toggleButton(form, button) {
+function toggleButton(form, button, config) {
   button.disabled = !form.checkValidity();
   button.classList.toggle(config.submitDisabled, !form.checkValidity());
 };

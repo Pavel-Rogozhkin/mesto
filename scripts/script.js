@@ -112,10 +112,14 @@ buttonEdit.addEventListener("click", () => {
   profileInput.value = profileDescr.textContent;
   openPopup(popupEditProfile);
 });
+
+const button = popupAddForm.querySelector(config.buttonSelector);
 buttonAdd.addEventListener("click", () => {
   popupAddForm.reset();
+  toggleButton(popupAddForm, button, config);
   openPopup(popupAddWindow);
 });
+
 popupEditClosed.addEventListener("click", () => closePopup(popupEditProfile));
 popupAddClosed.addEventListener("click", () => closePopup(popupAddWindow));
 popupPhotoClosed.addEventListener("click", () => closePopup(popupPhotoWindow));
