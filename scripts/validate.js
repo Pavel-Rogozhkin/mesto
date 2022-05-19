@@ -1,3 +1,5 @@
+import { config } from "./index.js";
+
 function enableValidation(config) {
   const forms = document.querySelectorAll(config.formSelector);
   forms.forEach((form) => {
@@ -20,7 +22,7 @@ function setEventListeners(form, config) {
   toggleButton(form, button, config);
 };
 
-function toggleButton(form, button, config) {
+export function toggleButton(form, button, config) {
   button.disabled = !form.checkValidity();
   button.classList.toggle(config.submitDisabled, !form.checkValidity());
 };
@@ -47,4 +49,4 @@ function handleFormInput(event, config) {
   };
 };
 
-enableValidation(config);
+// enableValidation(config);
