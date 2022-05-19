@@ -53,7 +53,7 @@ function submitAddCardHandler (event) {
     name: titleInput.value,
     link: linkInput.value
   }
-  createCard(newObject);
+  render(newObject);
   closePopup(popupAddWindow);
 }
 
