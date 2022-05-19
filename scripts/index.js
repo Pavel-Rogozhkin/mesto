@@ -1,5 +1,5 @@
 import { Card, initialCards } from "./Card.js";
-import { toggleButton } from "./validate.js";
+import { FormValidator, config } from "./FormValidator.js";
 
 const popupEditProfile = document.querySelector(".popup_type_edit");
 const popupAddWindow = document.querySelector(".popup_type_add");
@@ -22,15 +22,11 @@ const templateElement = document.querySelector(".templateElement");
 const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
 
-export const config = {
-  popupOpened: ".popup_opened",
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  buttonSelector: ".popup__submit",
-  submitDisabled: "popup__submit_type_disabled",
-  inputError: "popup__input_type_error",
-  formError: "popup__form-input-error",
-}
+const validEditForm = new FormValidator(popupEditForm, config);
+const validAddForm = new FormValidator(popupAddForm, config);
+
+validEditForm.enableValidation();
+validAddForm.enableValidation();
 
 function openPopup (popup) {
   popup.classList.add("popup_opened");
@@ -57,7 +53,7 @@ function submitAddCardHandler (event) {
     name: titleInput.value,
     link: linkInput.value
   }
-  cardsContainer.prepend(...[createCard(newObject)]);
+  createCard(newObject);
   closePopup(popupAddWindow);
 }
 
@@ -73,36 +69,6 @@ function closeByOverlay(evt) {
     closePopup(evt.target);
   };
 };
-
-//-----------------------------------------------------
-
-// function createCard (item) {
-//   const cloneElement = templateElement.content.cloneNode(true);
-//   const photoElement = cloneElement.querySelector(".element__photo");
-//   photoElement.src = item.link;
-//   photoElement.alt = item.name;
-//   cloneElement.querySelector(".element__title").textContent = item.name;
-
-//   const buttonLike = cloneElement.querySelector(".element__heart");
-//   buttonLike.addEventListener('click', () => {
-//     buttonLike.classList.toggle("element__heart_active"); 
-//   })
-
-//   const cardDelete = cloneElement.querySelector(".element__delete");
-//   cardDelete.addEventListener('click', () => {
-//     cardDelete.closest(".element").remove();
-//   })
-
-//   const buttonPhoto = cloneElement.querySelector(".element__photo");
-//   buttonPhoto.addEventListener("click", function (event) {
-//     popupTitle.textContent = event.target.alt;
-//     popupPhoto.src = event.target.src;
-//     popupPhoto.alt = event.target.alt;
-//     openPopup(popupPhotoWindow);
-//   });
-
-//   return cloneElement;
-// }
 
 function createCard (item) {
   const card = new Card (item, templateElement, handlePhotoClick);
@@ -127,8 +93,6 @@ function addInitialCards() {
 
 addInitialCards();
 
-// const card = initialCards.map(createCard);
-
 buttonEdit.addEventListener("click", () => {
   nameInput.value = profileTitle.textContent;
   profileInput.value = profileDescr.textContent;
@@ -140,7 +104,7 @@ const button = popupAddForm.querySelector(config.buttonSelector);
 
 buttonAdd.addEventListener("click", () => {
   popupAddForm.reset();
-  toggleButton(popupAddForm, button, config);
+  validAddForm._toggleButton(popupAddForm, button, config);
   openPopup(popupAddWindow);
 });
 
@@ -149,5 +113,3 @@ popupAddClosed.addEventListener("click", () => closePopup(popupAddWindow));
 popupPhotoClosed.addEventListener("click", () => closePopup(popupPhotoWindow));
 popupEditForm.addEventListener("submit", submitEditProfileHandler);
 popupAddForm.addEventListener("submit", submitAddCardHandler);
-
-// render();

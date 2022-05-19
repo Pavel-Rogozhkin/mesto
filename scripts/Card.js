@@ -29,7 +29,7 @@ export const initialCards = [
 export class Card {
 
   constructor(item, templateElement, handlePhotoClick) {
-    this._title = item.title;
+    this._name = item.name;
     this._link = item.link;
     this._templateElement = templateElement;
     this._handlePhotoElement = handlePhotoClick;
@@ -53,7 +53,7 @@ export class Card {
   }
 
   _handleCardPhoto() {
-    this._handlePhotoElement({title: this._title, link: this._link});
+    this._handlePhotoElement({name: this._name, link: this._link});
   }
 
   _setEventListeners() {
