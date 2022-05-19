@@ -76,12 +76,12 @@
       <form class="popup__form popup__form_type_add" name="popup-form" novalidate>
         <ul class="popup__inputs-list">
           <li class="popup__input-element">
-            <input id="title-input" class="popup__input popup__input_type_title popup__input_type_error" type="text" name="popup-form-title" placeholder="Название" minlength="2" maxlength="30" required>
-            <span class="title-input-error popup__span popup__form-input-error">Вы пропустили это поле.</span> 
+            <input id="title-input" class="popup__input popup__input_type_title" type="text" name="popup-form-title" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="title-input-error popup__span"></span> 
           </li>
           <li class="popup__input-element">
-            <input id="link-input" class="popup__input popup__input_type_link popup__input_type_error" type="URL" name="popup-form-link" placeholder="Ссылка на картинку" required>
-            <span class="link-input-error popup__span popup__form-input-error">Введите адрес сайта.</span>
+            <input id="link-input" class="popup__input popup__input_type_link" type="URL" name="popup-form-link" placeholder="Ссылка на картинку" required>
+            <span class="link-input-error popup__span"></span>
           </li>
         </ul>
         <button aria-label="Create" class="popup__submit" type="submit">Создать</button>
@@ -97,6 +97,7 @@
     </div>
   </div>
 
+  <script src="./scripts/utils/constants.js"></script>
   <script type="module" src="./scripts/index.js"></script>
     
 </body>

@@ -1,13 +1,3 @@
-export const config = {
-  popupOpened: ".popup_opened",
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  buttonSelector: ".popup__submit",
-  submitDisabled: "popup__submit_type_disabled",
-  inputError: "popup__input_type_error",
-  formError: "popup__form-input-error",
-}
-
 export class FormValidator {
 
   constructor (formElement, config) {
@@ -30,19 +20,20 @@ export class FormValidator {
     inputs.forEach((input) => {
       input.addEventListener("input", (event) => {
         this._handleFormInput(event);
-        this._toggleButton(this._formElement, button, config);
+        this.toggleButton(this._formElement, button, config);
       });
     });
-    this._toggleButton(this._formElement, button, config);
+    this.toggleButton(this._formElement, button, config);
   };
 
-  _toggleButton() {
+  toggleButton() {
     const button = this._formElement.querySelector(this._buttonSelector);
     button.disabled = !this._formElement.checkValidity();
     button.classList.toggle(this._submitDisabled, !this._formElement.checkValidity());
   };
 
   _handleFormInput(event) {
+    event.preventDefault();
     const input = event.target;
     const errorNode = document.querySelector(`.${input.id}-error`);
     if (input.validity.valid) {
