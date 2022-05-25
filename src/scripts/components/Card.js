@@ -1,10 +1,10 @@
 export class Card {
 
-  constructor(item, cardSelector, handlePhotoClick) {
+  constructor(item, cardSelector, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
     this._cardSelector = cardSelector;
-    this._handlePhotoElement = handlePhotoClick;
+    this._handlePhotoElement = handleCardClick;
   }
 
   _getTemplateElement() {

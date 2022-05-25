@@ -45,11 +45,11 @@ function submitAddCardHandler (event) {
 //   };
 // };
 
-function closeByOverlay(evt) {
-  if (evt.target.classList.contains("popup")) {
-    closePopup(evt.target);
-  };
-};
+// function closeByOverlay(evt) {
+//   if (evt.target.classList.contains("popup")) {
+//     closePopup(evt.target);
+//   };
+// };
 
 function createCard (item) {
   const card = new Card (item, cardSelector, handlePhotoClick);

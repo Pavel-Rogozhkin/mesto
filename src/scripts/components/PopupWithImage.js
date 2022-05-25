@@ -1,23 +1,18 @@
-export default class Popup {
+import Popup from "./Popup.js";
+
+export default class PopupWithImage extends Popup {
 
   constructor(popupSelector) {
+    super(popupSelector);
     this._popupSelector = popupSelector;
   };
 
   open() {
+    // popupTitle.textContent = item.name;
+    // popupPhoto.src = item.link;
+    // popupPhoto.alt = item.name;
     this._popupSelector.classList.add("popup_opened");
     document.addEventListener('keydown', this._handleEscClose(evt));
-  };
-
-  close() {
-    this._popupSelector.classList.remove("popup_opened");
-    document.removeEventListener('keydown', this._handleEscClose(evt));
-  };
-
-  _handleEscClose(evt) {
-    if (evt.key === "Escape") {
-      this.close(); 
-    };
   };
 
   setEventListeners() {
@@ -29,6 +24,13 @@ export default class Popup {
         this.close();
       };
     });
+    // submitListenerHandler....
   };
-  
+
+  close() {
+    this._popupSelector.classList.remove("popup_opened");
+    document.removeEventListener('keydown', this._handleEscClose(evt));
+    // event.preventDefault();
+  };
+
 };
