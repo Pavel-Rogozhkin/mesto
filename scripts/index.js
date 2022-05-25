@@ -9,17 +9,17 @@ addInitialCards();
 validEditForm.enableValidation();
 validAddForm.enableValidation();
 
-function openPopup (popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener('keydown', closeByEsc);
-  popup.addEventListener("mousedown", closeByOverlay);
-}
+// function openPopup (popup) {
+//   popup.classList.add("popup_opened");
+//   document.addEventListener('keydown', closeByEsc);
+//   popup.addEventListener("mousedown", closeByOverlay);
+// }
 
-function closePopup (popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', closeByEsc);
-  popup.removeEventListener("mousedown", closeByOverlay);
-}
+// function closePopup (popup) {
+//   popup.classList.remove("popup_opened");
+//   document.removeEventListener('keydown', closeByEsc);
+//   popup.removeEventListener("mousedown", closeByOverlay);
+// }
 
 function submitEditProfileHandler (event) {
   event.preventDefault();
