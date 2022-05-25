@@ -38,12 +38,12 @@ function submitAddCardHandler (event) {
   closePopup(popupAddWindow);
 }
 
-function closeByEsc(evt) {
-  if (evt.key === "Escape") {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened); 
-  };
-};
+// function closeByEsc(evt) {
+//   if (evt.key === "Escape") {
+//     const popupOpened = document.querySelector('.popup_opened');
+//     closePopup(popupOpened); 
+//   };
+// };
 
 function closeByOverlay(evt) {
   if (evt.target.classList.contains("popup")) {
