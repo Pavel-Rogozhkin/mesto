@@ -1,5 +1,15 @@
-import { Card } from "./components/Card.js";
-import { FormValidator } from "./components/FormValidator.js";
+import "core-js/actual/promise";
+// import "./pages/index.css";
+// import img from "./images";
+Promise.resolve(42).then((x) => console.log(x));
+
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Popup } from "../components/Popup.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { Section } from "../components/Section.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 const validEditForm = new FormValidator(popupEditForm, config);
 const validAddForm = new FormValidator(popupAddForm, config);
