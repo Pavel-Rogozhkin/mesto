@@ -20,6 +20,8 @@ const popupPhoto = document.querySelector(".popup__photo");
 
 const cardSelector = ".templateElement";
 const containerSelector = ".elements__list";
+const nameSelector = ".profile__title";
+const profileSelector = ".profile__description";
 
 const initialCards = [
   {

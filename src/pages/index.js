@@ -8,7 +8,9 @@ import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Section } from "../components/Section.js";
-// import { UserInfo } from "../components/UserInfo.js";
+import { UserInfo } from "../components/UserInfo.js";
+
+const mainUser = new UserInfo({nameSelector, profileSelector});
 
 const cardList = new Section (
   {
@@ -39,8 +41,8 @@ validEditForm.enableValidation();
 validAddForm.enableValidation();
 
 function submitEditProfileHandler() {
-  profileTitle.textContent = nameInput.value;
-  profileDescr.textContent = profileInput.value;
+  mainUser.name = nameInput.value;
+  mainUser.profile = profileInput.value;
   popupWithEditForm.close();
 };
 
@@ -63,8 +65,8 @@ function handlePhotoClick(item) {
 };
 
 buttonEdit.addEventListener("click", () => {
-  nameInput.value = profileTitle.textContent;
-  profileInput.value = profileDescr.textContent;
+  nameInput.value = mainUser.name;
+  profileInput.value = mainUser.profile;
   popupWithEditForm.open();
 });
 
