@@ -19,6 +19,7 @@ const popupTitle = document.querySelector(".popup__title-photo");
 const popupPhoto = document.querySelector(".popup__photo");
 
 const cardSelector = ".templateElement";
+const containerSelector = ".elements__list";
 
 const initialCards = [
   {

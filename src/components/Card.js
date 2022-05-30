@@ -13,7 +13,7 @@ export class Card {
     .content
     .querySelector(".element")
     .cloneNode(true);
-
+    
     return cardElement;
   }
 
