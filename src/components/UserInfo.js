@@ -5,9 +5,11 @@ export class UserInfo {
     this._profileElement = document.querySelector(profileSelector);
   };
 
-  getUserinfo(item) {
-    item.name = this._nameElement.textContent;
-    item.profile = this._profileElement.textContent;
+  getUserinfo() {
+    return {
+      name: this._nameElement.textContent,
+      profile: this._profileElement.textContent
+    }
   };
 
   setUserInfo(item) {
