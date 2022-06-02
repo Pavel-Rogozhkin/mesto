@@ -20,7 +20,7 @@ export class PopupWithForm extends Popup {
       };
     });
     document.addEventListener('keydown', (evt) => { this._handleEscClose(evt); });
-    this._popupForm.addEventListener("submit", this._submitForm);
+    this._popupForm.addEventListener("submit", () => { this._submitForm });
   };
 
   close() {
