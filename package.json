@@ -20,9 +20,8 @@
     "webpack-dev-server": "^4.9.0"
   },
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
