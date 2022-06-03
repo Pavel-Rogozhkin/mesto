@@ -6,11 +6,13 @@ export class PopupWithImage extends Popup {
     super(popupSelector);
   };
 
-  open() {
-    // popupTitle.textContent = item.name;
-    // popupPhoto.src = item.link;
-    // popupPhoto.alt = item.name;
-    this._popupElement.classList.add("popup_opened");
+  open({ link, name}) {
+    const popupTitle = this._popupElement.querySelector(".popup__title-photo");
+    const popupPhoto = this._popupElement.querySelector(".popup__photo");
+    popupTitle.textContent = name;
+    popupPhoto.src = link;
+    popupPhoto.alt = name;
+    super.open();
   };
 
   setEventListeners() {

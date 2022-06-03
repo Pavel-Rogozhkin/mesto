@@ -15,8 +15,8 @@ const buttonAdd = document.querySelector(".profile__button-add");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescr = document.querySelector(".profile__description");
 const cardsContainer = document.querySelector(".elements__list");
-const popupTitle = document.querySelector(".popup__title-photo");
-const popupPhoto = document.querySelector(".popup__photo");
+// const popupTitle = document.querySelector(".popup__title-photo");
+// const popupPhoto = document.querySelector(".popup__photo");
 
 const cardSelector = ".templateElement";
 const containerSelector = ".elements__list";
