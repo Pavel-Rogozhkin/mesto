@@ -4,20 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 
 <body class="page">
   
   <header class="header">
-    <img class="header__logo" src="./images/header.svg" alt="Место россия">
+    <img class="header__logo" src="<%=require('./images/header.svg')%>" alt="Место россия">
   </header>
   
   <main class="main">
     <section class="profile">
       <img class="profile__avatar" 
-        src="./images/zhak_iv_custo.svg" 
+        src="<%=require('./images/zhak_iv_custo.svg')%>" 
         alt="Жак-Ив-Кусто">
       <div class="profile__info">
         <div class="profile__first-line">
@@ -96,9 +95,6 @@
       <h3 class="popup__title-photo"></h3>
     </div>
   </div>
-
-  <script src="./utils/constants.js"></script>
-  <script type="module" src="./pages/index.js"></script>
     
 </body>
 </html>
