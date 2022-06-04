@@ -1,0 +1,29 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "* Figma\r * Картинки",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pavel-Rogozhkin/mesto.git"
+  },
+  "author": "Pavel Rogozhkin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pavel-Rogozhkin/mesto/issues"
+  },
+  "homepage": "https://github.com/Pavel-Rogozhkin/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "babel-loader": "^8.2.5",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "core-js": "^3.22.7"
+  }
+}
