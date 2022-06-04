@@ -8,7 +8,8 @@ export const buttonAdd = document.querySelector(".profile__button-add");
 export const nameSelector = ".profile__title";
 export const profileSelector = ".profile__description";
 
-const initialCards = [
+
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
