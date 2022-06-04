@@ -1,6 +1,20 @@
 import "core-js/actual/promise";
 import "../pages/index.css";
 
+import { 
+  initialCards,
+  config,
+  nameSelector,
+  profileSelector,
+  buttonEdit,
+  buttonAdd,
+  popupAddForm,
+  nameInput,
+  profileInput,
+  titleInput,
+  linkInput,
+} from "../utils/constants.js";
+
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -14,12 +28,12 @@ const cardList = new Section (
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card (item, cardSelector, handlePhotoClick);
+      const card = new Card (item, config.cardSelector, handlePhotoClick);
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     }
   },
-  containerSelector
+  config.containerSelector
 );
 
 cardList.renderItems();
@@ -48,7 +62,7 @@ function submitAddCardHandler() {
     name: titleInput.value,
     link: linkInput.value
   };
-  const card = new Card (newCard, cardSelector, handlePhotoClick);
+  const card = new Card (newCard, config.cardSelector, handlePhotoClick);
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
   cardPopup.close();
