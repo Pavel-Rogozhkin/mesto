@@ -1,5 +1,4 @@
 const path = require('path');
-<<<<<<< HEAD
 
 module.exports = {
     entry: { main: './src/index.js' },
@@ -85,4 +84,3 @@ module.exports = {
 
   ]
 }
->>>>>>> feature/classes

@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import { config } from "../utils/constants.js";
 
+=======
+>>>>>>> bf0f0a2e6008e0abb9f5b69b7cf040ffe203e6fe
 export class FormValidator {
 
   constructor (formElement, config) {
