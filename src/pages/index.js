@@ -28,13 +28,17 @@ const cardList = new Section (
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card (item, config.cardSelector, handlePhotoClick);
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
+      createCard(item);
     }
   },
   config.containerSelector
 );
+
+function createCard(item) {
+  const card = new Card (item, config.cardSelector, handlePhotoClick);
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+};
 
 cardList.renderItems();
 
@@ -62,9 +66,7 @@ function submitAddCardHandler() {
     name: titleInput.value,
     link: linkInput.value
   };
-  const card = new Card (newCard, config.cardSelector, handlePhotoClick);
-  const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+  createCard(newCard);
   cardPopup.close();
 };
 

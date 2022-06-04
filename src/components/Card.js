@@ -5,6 +5,8 @@ export class Card {
     this._link = item.link;
     this._cardSelector = cardSelector;
     this._handlePhotoElement = handleCardClick;
+    this._buttonLike = this.element.querySelector(".element__heart");
+    this._photoElement = this.element.querySelector(".element__photo");
   }
 
   _getTemplateElement() {
@@ -18,11 +20,12 @@ export class Card {
   }
 
   _handleCardLike() {
-    this.element.querySelector(".element__heart").classList.toggle("element__heart_active");
+    this._buttonLike.classList.toggle("element__heart_active");
   }
 
   _handleCardDelete() {
     this.element.remove();
+    this.element = null;
   }
 
   _handleCardPhoto() {
@@ -30,17 +33,17 @@ export class Card {
   }
 
   _setEventListeners() {
-    this.element.querySelector(".element__heart").addEventListener('click', () => this._handleCardLike());
+    this._buttonLike.addEventListener('click', () => this._handleCardLike());
     this.element.querySelector(".element__delete").addEventListener('click', () => this._handleCardDelete());
-    this.element.querySelector(".element__photo").addEventListener('click', () => this._handleCardPhoto());
+    this._photoElement.addEventListener('click', () => this._handleCardPhoto());
   }
 
   generateCard() {
     this.element = this._getTemplateElement();
     this._setEventListeners();
     this.element.querySelector(".element__title").textContent = this._name;
-    this.element.querySelector(".element__photo").src = this._link;
-    this.element.querySelector(".element__photo").alt = this._name;
+    this._photoElement.src = this._link;
+    this._photoElement.alt = this._name;
     return this.element;
   }
 }
