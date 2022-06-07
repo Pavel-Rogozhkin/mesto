@@ -5,8 +5,6 @@ export class Card {
     this._link = item.link;
     this._cardSelector = cardSelector;
     this._handlePhotoElement = handleCardClick;
-    this._buttonLike = this.element.querySelector(".element__heart");
-    this._photoElement = this.element.querySelector(".element__photo");
   }
 
   _getTemplateElement() {
@@ -33,6 +31,8 @@ export class Card {
   }
 
   _setEventListeners() {
+    this._buttonLike = this.element.querySelector(".element__heart");
+    this._photoElement = this.element.querySelector(".element__photo");
     this._buttonLike.addEventListener('click', () => this._handleCardLike());
     this.element.querySelector(".element__delete").addEventListener('click', () => this._handleCardDelete());
     this._photoElement.addEventListener('click', () => this._handleCardPhoto());
