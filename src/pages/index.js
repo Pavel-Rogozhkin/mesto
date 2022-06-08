@@ -37,8 +37,12 @@ const cardList = new Section (
 function createCard(item) {
   const card = new Card (item, config.cardSelector, handlePhotoClick);
   const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+  renderCard(cardElement);
 };
+
+function renderCard(cardElement) {
+  cardList.addItem(cardElement);
+}
 
 cardList.renderItems();
 
@@ -75,8 +79,9 @@ function handlePhotoClick(item) {
 };
 
 buttonEdit.addEventListener("click", () => {
-  nameInput.value = mainUser.getUserinfo().name;
-  profileInput.value = mainUser.getUserinfo().profile;
+  const { name, profile } = mainUser.getUserinfo()
+  nameInput.value = name;
+  profileInput.value = profile;
   profilePopup.open();
 });
 
