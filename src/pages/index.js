@@ -28,6 +28,12 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-43', token);
 
 // const cardList = {};
 
+// api.getUserInfo()
+// .then((user) => {
+//   nameInput.value = user.name;
+//   profileInput.value = user.about;
+// });
+
 api.getCards()
   .then((result) => {
     const cardList = new Section (
@@ -98,7 +104,12 @@ function submitAddCardHandler() {
     name: titleInput.value,
     link: linkInput.value
   };
-  createCard(newCard);
+  api.addCard(newCard)
+    .then((newCard) => {
+      const card = new Card (newCard, config.cardSelector, handlePhotoClick);
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    })
   cardPopup.close();
 };
 
@@ -107,9 +118,8 @@ function handlePhotoClick(item) {
 };
 
 buttonEdit.addEventListener("click", () => {
-  const user = api.getUserInfo()
+  api.getUserInfo()
     .then((user) => {
-      mainUser.setUserInfo(user);
       nameInput.value = user.name;
       profileInput.value = user.about;
     });
