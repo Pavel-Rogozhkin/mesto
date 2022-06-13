@@ -45,6 +45,15 @@ api.getCards()
     cardList.renderItems();
   })
 
+  // "073000a2c03c6157e0c0cbda" - "_Id"
+
+
+  // api.getUserInfo()
+  //   .then((user) => {
+  //     nameInput.value = user.name;
+  //     profileInput.value = user.about;
+  //   });
+
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
 
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);

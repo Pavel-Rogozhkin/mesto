@@ -3,6 +3,7 @@ export class Card {
   constructor(item, cardSelector, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
+    this._id = item.owner._id;
     this._countLikes = item.likes.length;
     this._cardSelector = cardSelector;
     this._handlePhotoElement = handleCardClick;
@@ -42,10 +43,14 @@ export class Card {
   generateCard() {
     this.element = this._getTemplateElement();
     this._setEventListeners();
+    console.log(this._id);
+    if (this._id !== "073000a2c03c6157e0c0cbda"){
+      this.element.querySelector('.element__delete').remove();
+    }
     this.element.querySelector(".element__title").textContent = this._name;
     this._photoElement.src = this._link;
     this._photoElement.alt = this._name;
     this.element.querySelector(".element__heart_ind_count").textContent = this._countLikes;
-        return this.element;
+    return this.element;
   }
 }

@@ -9,6 +9,7 @@ export const avatarClick = document.querySelector(".profile__avatar-edit");
 export const avatar = document.querySelector(".profile__avatar");
 export const nameSelector = ".profile__title";
 export const profileSelector = ".profile__description";
+export const myID = "073000a2c03c6157e0c0cbda";
 
 export const API_URL = 'https://mesto.nomoreparties.co/v1/cohort-43';
 
