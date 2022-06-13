@@ -14,6 +14,9 @@ import {
   titleInput,
   linkInput,
   token,
+  avatar,
+  avatarClick,
+  API_URL,
 } from "../utils/constants.js";
 
 import { Card } from "../components/Card.js";
@@ -24,15 +27,7 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
-const api = new Api('https://mesto.nomoreparties.co/v1/cohort-43', token);
-
-// const cardList = {};
-
-// api.getUserInfo()
-// .then((user) => {
-//   nameInput.value = user.name;
-//   profileInput.value = user.about;
-// });
+const api = new Api(API_URL, token);
 
 api.getCards()
   .then((result) => {
@@ -54,23 +49,32 @@ const mainUser = new UserInfo( { nameSelector, profileSelector } );
 
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
+const avatarPopup = new PopupWithForm(".popup_type_edit-avatar", submitEditAvatarHandler);
 const popupWithImage = new PopupWithImage(".popup_type_photo");
 
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 popupWithImage.setEventListeners();
+avatarPopup.setEventListeners();
 
 const validAddForm = new FormValidator(cardPopup._popupForm, config);
 const validEditForm = new FormValidator(profilePopup._popupForm, config);
+const validAvatarForm = new FormValidator(avatarPopup._popupForm, config);
 
 validEditForm.enableValidation();
 validAddForm.enableValidation();
+validAvatarForm.enableValidation();
 
 function submitEditProfileHandler(item) {
-  api.editUserInfo({name: item.name, about: item.link}); //{name: item.name, about: item.profile}
+  api.editUserInfo({name: item.name, about: item.link});
   mainUser.setUserInfo(item);
   profilePopup.close();
 };
+
+function submitEditAvatarHandler(avatarUrl) {
+  avatar.src = avatarUrl.name;
+  avatarPopup.close();
+}
 
 function submitAddCardHandler() {
   const newCard = {
@@ -104,3 +108,7 @@ buttonAdd.addEventListener("click", () => {
   validAddForm.toggleButton();
   cardPopup.open();
 });
+
+avatarClick.addEventListener("click", () => {
+  avatarPopup.open();
+})

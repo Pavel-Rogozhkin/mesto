@@ -5,9 +5,12 @@ export const titleInput = document.querySelector(".popup__input_type_title");
 export const linkInput = document.querySelector(".popup__input_type_link");
 export const buttonEdit = document.querySelector(".profile__button-edit");
 export const buttonAdd = document.querySelector(".profile__button-add");
+export const avatarClick = document.querySelector(".profile__avatar-edit");
+export const avatar = document.querySelector(".profile__avatar");
 export const nameSelector = ".profile__title";
 export const profileSelector = ".profile__description";
 
+export const API_URL = 'https://mesto.nomoreparties.co/v1/cohort-43';
 
 export const initialCards = [
   {
