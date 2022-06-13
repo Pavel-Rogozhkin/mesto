@@ -9,16 +9,21 @@ export class Api {
   }
 
   getCards() {
-    return fetch(this._url, {
+    return fetch(this._url + '/cards', {
       method: 'GET',
       headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
           return res.json();
+          // console.log("OK"+res);
         }
-        return Promise.reject("Возникла ошибка");
+        return Promise.reject("Возникла ошибулечка");
       })
+      // .then((result) => {
+      //   // console.log(result);
+      //   return (result);
+      // })
   }
 
   addCard({name, link}) {
@@ -27,7 +32,7 @@ export class Api {
       link: link,
     };
 
-    return fetch(this._url, {
+    return fetch(this._url + '/cards', {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(body),
@@ -41,7 +46,7 @@ export class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._url}/${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}`, {
       headers: this._headers,
       method: 'DELETE',
     })
@@ -52,5 +57,38 @@ export class Api {
       return Promise.reject("Возникла ошибка");
     })
   }
+
+  getUserInfo() {
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers,
+      method: 'GET',
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+      return Promise.reject("Возникла ошибка");
+      }
+    })
+  }
+
+  editUserInfo({name, about}) {
+    const body = {
+      name: name,
+      about: about,
+    };
+
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers,
+      method: 'PATCH',
+      body: JSON.stringify(body),
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject("Возникла ошибка");
+    })
+  }    
 
 }

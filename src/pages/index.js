@@ -24,36 +24,54 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
-const api = new Api('https://mesto.nomoreparties.co/v1/cohort-43/cards', token);
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-43', token);
 
-// api.getCards()
-//   .then((cards) => {
+// const cardList = {};
 
-//   })
+api.getCards()
+  .then((result) => {
+    const cardList = new Section (
+      {
+        items: result,
+        renderer: (item) => {
+          const card = new Card (item, config.cardSelector, handlePhotoClick);
+          const cardElement = card.generateCard();
+          cardList.addItem(cardElement);
+        }
+      },
+      config.containerSelector
+    );
+    cardList.renderItems();
+  })
 
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
 
-const cardList = new Section (
-  {
-    items: initialCards,
-    renderer: (item) => {
-      createCard(item);
-    }
-  },
-  config.containerSelector
-);
+// const dfdsf = api.getCards()
+//   .then((result) => {
+//     return result;
+//   })
 
-function createCard(item) {
-  const card = new Card (item, config.cardSelector, handlePhotoClick);
-  const cardElement = card.generateCard();
-  renderCard(cardElement);
-};
+// const cardList = new Section (
+//   {
+//     items: initialCards,
+//     renderer: (item) => {
+//       createCard(item);
+//     }
+//   },
+//   config.containerSelector
+// );
 
-function renderCard(cardElement) {
-  cardList.addItem(cardElement);
-}
+// function createCard(item) {
+//   const card = new Card (item, config.cardSelector, handlePhotoClick);
+//   const cardElement = card.generateCard();
+//   renderCard(cardElement);
+// };
 
-cardList.renderItems();
+// function renderCard(cardElement) {
+//   cardList.addItem(cardElement);
+// }
+
+// cardList.renderItems();
 
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
@@ -70,6 +88,7 @@ validEditForm.enableValidation();
 validAddForm.enableValidation();
 
 function submitEditProfileHandler(item) {
+  api.editUserInfo({name: item.name, about: item.link}); //{name: item.name, about: item.profile}
   mainUser.setUserInfo(item);
   profilePopup.close();
 };
@@ -88,9 +107,12 @@ function handlePhotoClick(item) {
 };
 
 buttonEdit.addEventListener("click", () => {
-  const { name, profile } = mainUser.getUserinfo()
-  nameInput.value = name;
-  profileInput.value = profile;
+  const user = api.getUserInfo()
+    .then((user) => {
+      mainUser.setUserInfo(user);
+      nameInput.value = user.name;
+      profileInput.value = user.about;
+    });
   profilePopup.open();
 });
 

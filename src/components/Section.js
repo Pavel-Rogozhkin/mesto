@@ -11,6 +11,7 @@ export class Section {
   };
 
   renderItems() {
+    // console.log(this._renderedItems);
     this._renderedItems.forEach(item => {
       this._renderer(item);
     });
