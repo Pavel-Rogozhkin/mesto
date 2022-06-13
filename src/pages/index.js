@@ -13,6 +13,7 @@ import {
   profileInput,
   titleInput,
   linkInput,
+  token,
 } from "../utils/constants.js";
 
 import { Card } from "../components/Card.js";
@@ -21,6 +22,14 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { Api } from "../components/Api.js";
+
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-43/cards', token);
+
+// api.getCards()
+//   .then((cards) => {
+
+//   })
 
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
 

@@ -47,3 +47,5 @@ export const config = {
   cardSelector: ".templateElement",
   containerSelector: ".elements__list",
 }
+
+export const token = '05e45ebf-d4ff-4e41-8bcf-ab592cb66400';
