@@ -16,14 +16,9 @@ export class Api {
       .then((res) => {
         if (res.ok) {
           return res.json();
-          // console.log("OK"+res);
         }
-        return Promise.reject("Возникла ошибулечка");
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
-      // .then((result) => {
-      //   // console.log(result);
-      //   return (result);
-      // })
   }
 
   addCard({name, link}) {
@@ -41,7 +36,7 @@ export class Api {
         if (res.ok) {
           return res.json();
         }
-        return Promise.reject("Возникла ошибка");
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -54,7 +49,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject("Возникла ошибка");
+      return Promise.reject(`Ошибка: ${res.status}`);
     })
   }
 
@@ -67,7 +62,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       } else {
-      return Promise.reject("Возникла ошибка");
+      return Promise.reject(`Ошибка: ${res.status}`);
       }
     })
   }
@@ -87,7 +82,7 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject("Возникла ошибка");
+      return Promise.reject(`Ошибка: ${res.status}`);
     })
   }    
 

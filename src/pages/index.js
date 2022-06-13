@@ -52,33 +52,6 @@ api.getCards()
 
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
 
-// const dfdsf = api.getCards()
-//   .then((result) => {
-//     return result;
-//   })
-
-// const cardList = new Section (
-//   {
-//     items: initialCards,
-//     renderer: (item) => {
-//       createCard(item);
-//     }
-//   },
-//   config.containerSelector
-// );
-
-// function createCard(item) {
-//   const card = new Card (item, config.cardSelector, handlePhotoClick);
-//   const cardElement = card.generateCard();
-//   renderCard(cardElement);
-// };
-
-// function renderCard(cardElement) {
-//   cardList.addItem(cardElement);
-// }
-
-// cardList.renderItems();
-
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
 const popupWithImage = new PopupWithImage(".popup_type_photo");
