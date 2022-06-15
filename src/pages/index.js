@@ -28,32 +28,11 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
+/**
+ *   // "073000a2c03c6157e0c0cbda" - "MY_Id"
+ */
+
 const api = new Api(API_URL, token);
-
-api.getCards()
-  .then((result) => {
-    const cardList = new Section (
-      {
-        items: result,
-        renderer: (item) => {
-          const card = new Card (item, config.cardSelector, handlePhotoClick);
-          const cardElement = card.generateCard();
-          cardList.addItem(cardElement);
-        }
-      },
-      config.containerSelector
-    );
-    cardList.renderItems();
-  })
-
-  // "073000a2c03c6157e0c0cbda" - "_Id"
-
-
-  // api.getUserInfo()
-  //   .then((user) => {
-  //     nameInput.value = user.name;
-  //     profileInput.value = user.about;
-  //   });
 
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
 
@@ -63,15 +42,45 @@ const avatarPopup = new PopupWithForm(".popup_type_edit-avatar", submitEditAvata
 const popupWithImage = new PopupWithImage(".popup_type_photo");
 const popupWithConfirmation = new PopupWithConfirmation(".popup_type_delete-card", submitDeleteCardHandler); 
 
+const validAddForm = new FormValidator(cardPopup._popupForm, config);
+const validEditForm = new FormValidator(profilePopup._popupForm, config);
+const validAvatarForm = new FormValidator(avatarPopup._popupForm, config);
+
+getInitialCards();
+getUserData();
+
+function getInitialCards() {
+  api.getCards()
+    .then((result) => {
+      const cardList = new Section (
+        {
+          items: result,
+          renderer: (item) => {
+            const card = new Card (item, config.cardSelector, handlePhotoClick);
+            const cardElement = card.generateCard();
+            cardList.addItem(cardElement);
+          }
+        },
+        config.containerSelector
+      );
+      cardList.renderItems();
+    })
+}
+
+function getUserData() {
+  api.getUserInfo()
+    .then((user) => {
+      nameInput.value = user.name;
+      profileInput.value = user.about;
+        mainUser.setUserInfo({name: user.name, link: user.about});
+    });
+}
+
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 popupWithImage.setEventListeners();
 avatarPopup.setEventListeners();
 popupWithConfirmation.setEventListeners();
-
-const validAddForm = new FormValidator(cardPopup._popupForm, config);
-const validEditForm = new FormValidator(profilePopup._popupForm, config);
-const validAvatarForm = new FormValidator(avatarPopup._popupForm, config);
 
 validEditForm.enableValidation();
 validAddForm.enableValidation();

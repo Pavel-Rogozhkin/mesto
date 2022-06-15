@@ -3,7 +3,8 @@ export class Card {
   constructor(item, cardSelector, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
-    this._id = item.owner._id;
+    this._owenerId = item.owner._id;
+    this._cardId = item._id;
     this._countLikes = item.likes.length;
     this._cardSelector = cardSelector;
     this._handlePhotoElement = handleCardClick;
