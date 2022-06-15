@@ -22,6 +22,7 @@ import {
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
@@ -60,11 +61,13 @@ const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
 const avatarPopup = new PopupWithForm(".popup_type_edit-avatar", submitEditAvatarHandler);
 const popupWithImage = new PopupWithImage(".popup_type_photo");
+const popupWithConfirmation = new PopupWithConfirmation(".popup_type_delete-card", submitDeleteCardHandler); 
 
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 popupWithImage.setEventListeners();
 avatarPopup.setEventListeners();
+popupWithConfirmation.setEventListeners();
 
 const validAddForm = new FormValidator(cardPopup._popupForm, config);
 const validEditForm = new FormValidator(profilePopup._popupForm, config);
@@ -73,6 +76,11 @@ const validAvatarForm = new FormValidator(avatarPopup._popupForm, config);
 validEditForm.enableValidation();
 validAddForm.enableValidation();
 validAvatarForm.enableValidation();
+
+function submitDeleteCardHandler() {
+  api.deleteCard(cardId);
+  popupWithConfirmation.close();
+};
 
 function submitEditProfileHandler(item) {
   api.editUserInfo({name: item.name, about: item.link});
