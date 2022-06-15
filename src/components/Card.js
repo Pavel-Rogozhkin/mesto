@@ -1,6 +1,6 @@
 export class Card {
 
-  constructor(item, cardSelector, handleCardClick) {
+  constructor(item, cardSelector, handleCardClick, handleDelClick) {
     this._name = item.name;
     this._link = item.link;
     this._owenerId = item.owner._id;
@@ -8,6 +8,7 @@ export class Card {
     this._countLikes = item.likes.length;
     this._cardSelector = cardSelector;
     this._handlePhotoElement = handleCardClick;
+    this._deleteClick = handleDelClick;
   }
 
   _getTemplateElement() {
@@ -24,7 +25,11 @@ export class Card {
     this._buttonLike.classList.toggle("element__heart_active");
   }
 
-  _handleCardDelete() {
+  _handleDelClick() {
+    this._deleteClick;
+  }
+
+  handleCardDelete() {
     this.element.remove();
     this.element = null;
   }
@@ -38,8 +43,8 @@ export class Card {
     this._photoElement = this.element.querySelector(".element__photo");
     this._buttonLike.addEventListener('click', () => this._handleCardLike());
     this.element.querySelector(".element__delete").addEventListener('click', () => {
-      // callback from index.js;
-      this._handleCardDelete();
+      this._handleDelClick();
+      // this.handleCardDelete();
     });
     this._photoElement.addEventListener('click', () => this._handleCardPhoto());
   }
@@ -47,8 +52,7 @@ export class Card {
   generateCard() {
     this.element = this._getTemplateElement();
     this._setEventListeners();
-    console.log(this._id);
-    if (this._id !== "073000a2c03c6157e0c0cbda"){
+    if (this._owenerId !== "073000a2c03c6157e0c0cbda"){
       this.element.querySelector('.element__delete').remove();
     }
     this.element.querySelector(".element__title").textContent = this._name;
