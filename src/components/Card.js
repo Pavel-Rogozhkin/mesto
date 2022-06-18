@@ -1,6 +1,6 @@
 export class Card {
 
-  constructor(item, cardSelector, handleCardClick, handleDelClick) {
+  constructor(item, cardSelector, handlers) {
     this._name = item.name;
     this._link = item.link;
     this._owenerId = item.owner._id;
@@ -9,8 +9,9 @@ export class Card {
     this._likes = item.likes;
     this._sumOfLikes = item.likes.length;
     this._cardSelector = cardSelector;
-    this._handlePhotoElement = handleCardClick;
-    this._deleteClick = handleDelClick;
+    this._handlePhotoElement = handlers.handlePhotoClick;
+    this._handleCardLike = handlers.handleCardLike;
+    this._handleDeleteCard = handlers.handleDeleteCard;
   }
 
   _renderMyLikes() {
@@ -37,10 +38,6 @@ export class Card {
 
   _handleCardLike() {
     this._buttonLike.classList.toggle("element__heart_active");
-  }
-
-  _handleDelClick() {
-    this._deleteClick;
   }
 
   handleCardDelete() {
