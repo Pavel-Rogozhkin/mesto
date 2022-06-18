@@ -30,7 +30,6 @@ export class Card {
   }
 
   countLikes(res) {
-    console.log(res.likes.length);
     this.element.querySelector(".element__heart_ind_count").textContent = res.likes.length;
   }
 
@@ -50,7 +49,7 @@ export class Card {
     this._handleCardLike(this._cardId, like);
   }
 
-  handleCardDelete() {
+  deleteCard(item) {
     this.element.remove();
     this.element = null;
   }
@@ -63,9 +62,7 @@ export class Card {
     this._buttonLike = this.element.querySelector(".element__heart");
     this._photoElement = this.element.querySelector(".element__photo");
     this._buttonLike.addEventListener('click', () => this._handleCardLikes());
-    this.element.querySelector(".element__delete").addEventListener('click', () => {
-      this.handleCardDelete();
-    });
+    this.element.querySelector(".element__delete").addEventListener('click', () => this._handleDeleteCard(this._cardId) );
     this._photoElement.addEventListener('click', () => this._handleCardPhoto());
   }
 

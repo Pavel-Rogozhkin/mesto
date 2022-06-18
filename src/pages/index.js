@@ -36,7 +36,7 @@ const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
 const avatarPopup = new PopupWithForm(".popup_type_edit-avatar", submitEditAvatarHandler);
 const popupWithImage = new PopupWithImage(".popup_type_photo");
-const popupDelCard = new PopupWithConfirmation(".popup_type_delete-card", submitDeleteCardHandler); 
+const popupDelCard = new PopupWithConfirmation(".popup_type_delete-card"); 
 
 const validAddForm = new FormValidator(cardPopup._popupForm, config);
 const validEditForm = new FormValidator(profilePopup._popupForm, config);
@@ -69,7 +69,7 @@ const createNewCard = (item) => {
     },
     handleDeleteCard(item) {
       popupDelCard.open();
-      popupDelCard.handleSubmit(() => {
+      popupDelCard.submitDel(() => {
         api.deleteCard(item)
           .then(() => card.deleteCard())
           .catch((err) => console.log(err))
@@ -105,15 +105,6 @@ function getUserData() {
       profileInput.value = user.about;
       mainUser.setUserInfo({name: user.name, link: user.about});
     })
-};
-
-function submitDeleteCardHandler(data) {
-  popupDelCard.open();
-  popupDelCard.handleSubmit(() => {
-    api.deleteCard(data)
-      .then(() => card.deleteCard());
-    popupDelCard.close();
-  })
 };
 
 function submitEditProfileHandler(item) {

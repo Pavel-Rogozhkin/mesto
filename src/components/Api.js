@@ -9,14 +9,12 @@ export class Api {
   }
 
   changeCardLikeState(cardId, like) {
-    console.log(like);
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: like ? 'PUT' : 'DELETE',
       headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
-          console.log(res);
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
