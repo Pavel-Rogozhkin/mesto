@@ -10,8 +10,8 @@ export class Section {
     this._container.prepend(element);
   };
 
-  renderItems() {
-    this._renderedItems.forEach(item => {
+  renderItems(cards) {
+    cards.forEach(item => {
       this._renderer(item);
     });
   };

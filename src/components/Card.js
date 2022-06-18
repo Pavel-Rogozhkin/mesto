@@ -43,8 +43,7 @@ export class Card {
     this._photoElement = this.element.querySelector(".element__photo");
     this._buttonLike.addEventListener('click', () => this._handleCardLike());
     this.element.querySelector(".element__delete").addEventListener('click', () => {
-      this._handleDelClick();
-      // this.handleCardDelete();
+      this.handleCardDelete();
     });
     this._photoElement.addEventListener('click', () => this._handleCardPhoto());
   }
