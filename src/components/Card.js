@@ -49,7 +49,7 @@ export class Card {
     this._handleCardLike(this._cardId, like);
   }
 
-  deleteCard(item) {
+  deleteCard() {
     this.element.remove();
     this.element = null;
   }

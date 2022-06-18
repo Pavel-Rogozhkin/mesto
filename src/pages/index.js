@@ -67,10 +67,10 @@ const createNewCard = (item) => {
         })
         .catch((err) => console.log(err))
     },
-    handleDeleteCard(item) {
+    handleDeleteCard(cardId) {
       popupDelCard.open();
-      popupDelCard.submitDel(() => {
-        api.deleteCard(item)
+      popupDelCard.submitDeleteCard(() => {
+        api.deleteCard(cardId)
           .then(() => card.deleteCard())
           .catch((err) => console.log(err))
         popupDelCard.close();
