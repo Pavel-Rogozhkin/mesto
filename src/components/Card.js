@@ -29,8 +29,9 @@ export class Card {
     return likeCheck;
   }
 
-  countLikes(likes) {
-    this.element.querySelector(".element__heart_ind_count").textContent = likes.length;
+  countLikes(res) {
+    console.log(res.likes.length);
+    this.element.querySelector(".element__heart_ind_count").textContent = res.likes.length;
   }
 
   _getTemplateElement() {
@@ -45,8 +46,8 @@ export class Card {
 
   _handleCardLikes() {
     this._buttonLike.classList.toggle("element__heart_active");
-    console.log(this._cardId, this._renderMyLikes());
-    this._handleCardLike(this._cardId, this._renderMyLikes());
+    const like = this._buttonLike.classList.contains("element__heart_active");
+    this._handleCardLike(this._cardId, like);
   }
 
   handleCardDelete() {

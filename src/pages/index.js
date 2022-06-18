@@ -61,10 +61,8 @@ const createNewCard = (item) => {
       popupWithImage.open(item);
     },
     handleCardLike: (cardId, like) => {
-      console.log(cardId, like);
       api.changeCardLikeState(cardId, like)
         .then((res) => {
-          console.log(res);
           card.countLikes(res); 
         })
         .catch((err) => console.log(err))
