@@ -8,6 +8,19 @@ export class Api {
     };
   }
 
+  changeCardLikeState(cardId, like) {
+    return fetch(`${this._url}/cards/like/${cardId}`, {
+      method: like ? 'PUT' : 'DELETE',
+      headers: this._headers
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
+
   getCards() {
     return fetch(this._url + '/cards', {
       method: 'GET',

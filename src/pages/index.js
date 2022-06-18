@@ -55,12 +55,35 @@ validEditForm.enableValidation();
 validAddForm.enableValidation();
 validAvatarForm.enableValidation();
 
+const createNewCard = (item) => {
+  const card = new Card (item, config.cardSelector, {
+    handlePhotoClick: () => {
+      popupWithImage.open(item);
+    },
+    handleCardLike: (item) => {
+      api.changeCardLikeState(item._id, like)
+        .then((res) => card.countLikes(res))
+        .catch((err) => console.log(err))
+    },
+    handleDeleteCard(item) {
+      popupDelCard.open();
+      popupDelCard.handleSubmit(() => {
+        api.deleteCard(item)
+          .then(() => card.deleteCard())
+          .catch((err) => console.log(err))
+        popupDelCard.close();
+      });
+    },
+  });
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
 const cardList = new Section (
   {
     renderer: (item) => {
-      const card = new Card (item, config.cardSelector, handlePhotoClick);
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
+      const newCardElement = createNewCard(item);
+      cardList.addItem(newCardElement);
     }
   },
   config.containerSelector
@@ -109,15 +132,10 @@ function submitAddCardHandler() {
   };
   api.addCard(newCard)
     .then((newCard) => {
-      const card = new Card (newCard, config.cardSelector, handlePhotoClick, handleDelClick);
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
+      const newCardElement = createNewCard(newCard);
+      cardList.addItem(newCardElement);
     })
   cardPopup.close();
-};
-
-function handlePhotoClick(item) {
-  popupWithImage.open(item);
 };
 
 buttonEdit.addEventListener("click", () => {

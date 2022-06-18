@@ -5,10 +5,24 @@ export class Card {
     this._link = item.link;
     this._owenerId = item.owner._id;
     this._cardId = item._id;
-    this._countLikes = item.likes.length;
+    this._myId = "073000a2c03c6157e0c0cbda";
+    this._likes = item.likes;
+    this._sumOfLikes = item.likes.length;
     this._cardSelector = cardSelector;
     this._handlePhotoElement = handleCardClick;
     this._deleteClick = handleDelClick;
+  }
+
+  _renderMyLikes() {
+    const likeCheck = this._likes.some((like) => like._id === this._myId);
+    if (likeCheck) {
+      this._buttonLike.classList.add("element__heart_active");
+    }
+  };
+
+  isLikeMine() {
+    const likeCheck = this._likes.some((like) => like._id === this._myId);
+    return likeCheck;
   }
 
   _getTemplateElement() {
@@ -57,7 +71,8 @@ export class Card {
     this.element.querySelector(".element__title").textContent = this._name;
     this._photoElement.src = this._link;
     this._photoElement.alt = this._name;
-    this.element.querySelector(".element__heart_ind_count").textContent = this._countLikes;
+    this.element.querySelector(".element__heart_ind_count").textContent = this._sumOfLikes;
+    this._renderMyLikes();
     return this.element;
   }
 }
