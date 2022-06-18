@@ -2,7 +2,6 @@ import "core-js/actual/promise";
 import "../pages/index.css";
 
 import { 
-  initialCards,
   config,
   nameSelector,
   profileSelector,
@@ -108,7 +107,11 @@ function getUserData() {
 };
 
 function submitEditProfileHandler(item) {
-  api.editUserInfo({name: item.name, about: item.link});
+  isLoading(true, config.buttonSelector, profilePopup);
+  api.editUserInfo({name: item.name, about: item.link})
+    .then(() => {
+      isLoading(false, config.buttonSelector, profilePopup);
+    });
   mainUser.setUserInfo(item);
   profilePopup.close();
 };
@@ -119,12 +122,14 @@ function submitEditAvatarHandler(avatarUrl) {
 };
 
 function submitAddCardHandler() {
+  isLoading(false, config.buttonSelector, cardPopup);
   const newCard = {
     name: titleInput.value,
     link: linkInput.value
   };
   api.addCard(newCard)
     .then((newCard) => {
+      isLoading(false, config.buttonSelector, cardPopup);
       const newCardElement = createNewCard(newCard);
       cardList.addItem(newCardElement);
     })
@@ -149,3 +154,12 @@ buttonAdd.addEventListener("click", () => {
 avatarClick.addEventListener("click", () => {
   avatarPopup.open();
 });
+
+const isLoading = (state, buttonSelector, loadedText = "Сохранить", loadingText = "Сохранение...") => {
+  let buttonText = document.querySelector(buttonSelector).textContent;
+  if (state) {
+    buttonText = loadedText;
+  } else {
+    buttonText = loadingText;
+  };
+};
