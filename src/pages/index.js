@@ -60,9 +60,13 @@ const createNewCard = (item) => {
     handlePhotoClick: () => {
       popupWithImage.open(item);
     },
-    handleCardLike: (item) => {
-      api.changeCardLikeState(item._id, like)
-        .then((res) => card.countLikes(res))
+    handleCardLike: (cardId, like) => {
+      console.log(cardId, like);
+      api.changeCardLikeState(cardId, like)
+        .then((res) => {
+          console.log(res);
+          card.countLikes(res); 
+        })
         .catch((err) => console.log(err))
     },
     handleDeleteCard(item) {

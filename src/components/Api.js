@@ -9,7 +9,8 @@ export class Api {
   }
 
   changeCardLikeState(cardId, like) {
-    return fetch(`${this._url}/cards/like/${cardId}`, {
+    console.log(cardId, like);
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: like ? 'PUT' : 'DELETE',
       headers: this._headers
     })

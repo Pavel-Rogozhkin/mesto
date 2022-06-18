@@ -18,12 +18,19 @@ export class Card {
     const likeCheck = this._likes.some((like) => like._id === this._myId);
     if (likeCheck) {
       this._buttonLike.classList.add("element__heart_active");
+      return true;
+    } else {
+      return false;
     }
   };
 
   isLikeMine() {
     const likeCheck = this._likes.some((like) => like._id === this._myId);
     return likeCheck;
+  }
+
+  countLikes(likes) {
+    this.element.querySelector(".element__heart_ind_count").textContent = likes.length;
   }
 
   _getTemplateElement() {
@@ -36,8 +43,10 @@ export class Card {
     return cardElement;
   }
 
-  _handleCardLike() {
+  _handleCardLikes() {
     this._buttonLike.classList.toggle("element__heart_active");
+    console.log(this._cardId, this._renderMyLikes());
+    this._handleCardLike(this._cardId, this._renderMyLikes());
   }
 
   handleCardDelete() {
@@ -52,7 +61,7 @@ export class Card {
   _setEventListeners() {
     this._buttonLike = this.element.querySelector(".element__heart");
     this._photoElement = this.element.querySelector(".element__photo");
-    this._buttonLike.addEventListener('click', () => this._handleCardLike());
+    this._buttonLike.addEventListener('click', () => this._handleCardLikes());
     this.element.querySelector(".element__delete").addEventListener('click', () => {
       this.handleCardDelete();
     });
