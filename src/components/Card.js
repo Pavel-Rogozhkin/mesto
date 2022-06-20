@@ -15,7 +15,8 @@ export class Card {
   }
 
   _renderMyLikes() {
-    const likeCheck = this.isLikeMine();
+    const likeCheck = this._likes.some((like) => like._id === this._myId);
+    // const likeCheck = this.isLikeMine();
     if (likeCheck) {
       this._buttonLike.classList.add("element__heart_active");
       return true;

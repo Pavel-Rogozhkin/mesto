@@ -43,8 +43,8 @@ const validAddForm = new FormValidator(cardPopup.popupForm, config);
 const validEditForm = new FormValidator(profilePopup.popupForm, config);
 const validAvatarForm = new FormValidator(avatarPopup.popupForm, config);
 
-getUserData();
-getInitialCards();
+// getUserData();
+// getInitialCards();
 
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
@@ -92,25 +92,20 @@ const cardList = new Section (
   config.containerSelector
 );
 
-function getInitialCards() {
-  api.getCards()
-    .then((cards) => {
-      cardList.renderItems(cards);
-    })
-};
-
-function getUserData() {
-  api.getUserInfo()
-    .then((user) => {
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([user, cards]) => {
       nameInput.value = user.name;
       profileInput.value = user.about;
       mainUser.setUserInfo({name: user.name, link: user.about});
+      cardList.renderItems(cards);
+      avatar.src = user.avatar;
     })
-};
+  .catch((err) => console.log(err));
 
 function submitEditProfileHandler(item) {
   isLoading(true, config.buttonSelector, profilePopup);
   api.editUserInfo({name: item.name, about: item.link})
+    .catch((err) => console.log(err))
     .finally(() => {
       isLoading(false, config.buttonSelector, profilePopup);
     })
