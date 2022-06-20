@@ -111,9 +111,9 @@ function getUserData() {
 function submitEditProfileHandler(item) {
   isLoading(true, config.buttonSelector, profilePopup);
   api.editUserInfo({name: item.name, about: item.link})
-    .then(() => {
+    .finally(() => {
       isLoading(false, config.buttonSelector, profilePopup);
-    });
+    })
   mainUser.setUserInfo(item);
   profilePopup.close();
 };
