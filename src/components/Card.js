@@ -15,7 +15,7 @@ export class Card {
   }
 
   _renderMyLikes() {
-    const likeCheck = this._likes.some((like) => like._id === this._myId);
+    const likeCheck = this.isLikeMine();
     if (likeCheck) {
       this._buttonLike.classList.add("element__heart_active");
       return true;
@@ -30,7 +30,7 @@ export class Card {
   }
 
   countLikes(res) {
-    this.element.querySelector(".element__heart_ind_count").textContent = res.likes.length;
+    this._likeCount.textContent = res.likes.length;
   }
 
   _getTemplateElement() {
@@ -45,7 +45,7 @@ export class Card {
 
   _handleCardLikes() {
     this._buttonLike.classList.toggle("element__heart_active");
-    const like = this._buttonLike.classList.contains("element__heart_active");
+    const like = this.isLikeMine();
     this._handleCardLike(this._cardId, like);
   }
 
@@ -61,6 +61,7 @@ export class Card {
   _setEventListeners() {
     this._buttonLike = this.element.querySelector(".element__heart");
     this._photoElement = this.element.querySelector(".element__photo");
+    this._likeCount = this.element.querySelector(".element__heart_ind_count");
     this._buttonLike.addEventListener('click', () => this._handleCardLikes());
     this.element.querySelector(".element__delete").addEventListener('click', () => this._handleDeleteCard(this._cardId) );
     this._photoElement.addEventListener('click', () => this._handleCardPhoto());
@@ -75,7 +76,7 @@ export class Card {
     this.element.querySelector(".element__title").textContent = this._name;
     this._photoElement.src = this._link;
     this._photoElement.alt = this._name;
-    this.element.querySelector(".element__heart_ind_count").textContent = this._sumOfLikes;
+    this._likeCount.textContent = this._sumOfLikes;
     this._renderMyLikes();
     return this.element;
   }
