@@ -4,14 +4,14 @@ export class PopupWithImage extends Popup {
 
   constructor(popupSelector) {
     super(popupSelector);
+    this._popupTitle = this._popupElement.querySelector(".popup__title-photo");
+    this._popupPhoto = this._popupElement.querySelector(".popup__photo");
   };
 
   open({ link, name}) {
-    const popupTitle = this._popupElement.querySelector(".popup__title-photo");
-    const popupPhoto = this._popupElement.querySelector(".popup__photo");
-    popupTitle.textContent = name;
-    popupPhoto.src = link;
-    popupPhoto.alt = name;
+    this._popupTitle.textContent = name;
+    this._popupPhoto.src = link;
+    this._popupPhoto.alt = name;
     super.open();
   };
 
