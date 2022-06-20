@@ -18,6 +18,8 @@ import {
   API_URL,
 } from "../utils/constants.js";
 
+const headers = { 'Content-type': 'application/json', authorization: token, };
+
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -37,9 +39,9 @@ const avatarPopup = new PopupWithForm(".popup_type_edit-avatar", submitEditAvata
 const popupWithImage = new PopupWithImage(".popup_type_photo");
 const popupDelCard = new PopupWithConfirmation(".popup_type_delete-card"); 
 
-const validAddForm = new FormValidator(cardPopup._popupForm, config);
-const validEditForm = new FormValidator(profilePopup._popupForm, config);
-const validAvatarForm = new FormValidator(avatarPopup._popupForm, config);
+const validAddForm = new FormValidator(cardPopup.popupForm, config);
+const validEditForm = new FormValidator(profilePopup.popupForm, config);
+const validAvatarForm = new FormValidator(avatarPopup.popupForm, config);
 
 getUserData();
 getInitialCards();
@@ -122,16 +124,18 @@ function submitEditAvatarHandler(avatarUrl) {
 };
 
 function submitAddCardHandler() {
-  isLoading(false, config.buttonSelector, cardPopup);
+  isLoading(true, config.buttonSelector, cardPopup);
   const newCard = {
     name: titleInput.value,
     link: linkInput.value
   };
   api.addCard(newCard)
     .then((newCard) => {
-      isLoading(false, config.buttonSelector, cardPopup);
       const newCardElement = createNewCard(newCard);
       cardList.addItem(newCardElement);
+    })
+    .finally(() => {
+      isLoading(false, config.buttonSelector, cardPopup);
     })
   cardPopup.close();
 };
@@ -162,4 +166,5 @@ const isLoading = (state, buttonSelector, loadedText = "Сохранить", loa
   } else {
     buttonText = loadingText;
   };
+  
 };
