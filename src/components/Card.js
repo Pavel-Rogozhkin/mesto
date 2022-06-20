@@ -5,18 +5,17 @@ export class Card {
     this._link = item.link;
     this._owenerId = item.owner._id;
     this._cardId = item._id;
-    this._myId = "073000a2c03c6157e0c0cbda";
     this._likes = item.likes;
     this._sumOfLikes = item.likes.length;
     this._cardSelector = cardSelector;
     this._handlePhotoElement = handlers.handlePhotoClick;
     this._handleCardLike = handlers.handleCardLike;
     this._handleDeleteCard = handlers.handleDeleteCard;
+    this._getMyId = handlers.getMyId;
   }
 
   _renderMyLikes() {
-    const likeCheck = this._likes.some((like) => like._id === this._myId);
-    // const likeCheck = this.isLikeMine();
+    const likeCheck = this.isLikeMine();
     if (likeCheck) {
       this._buttonLike.classList.add("element__heart_active");
       return true;
@@ -31,6 +30,8 @@ export class Card {
   }
 
   countLikes(res) {
+    console.log(res);
+    console.log(this._myId);
     this._likeCount.textContent = res.likes.length;
   }
 
@@ -44,8 +45,11 @@ export class Card {
     return cardElement;
   }
 
-  _handleCardLikes() {
+  toggleLike() {
     this._buttonLike.classList.toggle("element__heart_active");
+  }
+
+  _handleCardLikes() {
     const like = this.isLikeMine();
     this._handleCardLike(this._cardId, like);
   }
@@ -69,9 +73,10 @@ export class Card {
   }
 
   generateCard() {
+    this._myId = this._getMyId();
     this.element = this._getTemplateElement();
     this._setEventListeners();
-    if (this._owenerId !== "073000a2c03c6157e0c0cbda"){
+    if (this._owenerId !== this._myId){
       this.element.querySelector('.element__delete').remove();
     }
     this.element.querySelector(".element__title").textContent = this._name;

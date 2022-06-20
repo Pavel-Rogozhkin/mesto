@@ -30,21 +30,15 @@ import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
 const api = new Api(API_URL, headers);
-
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
-
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
 const avatarPopup = new PopupWithForm(".popup_type_edit-avatar", submitEditAvatarHandler);
 const popupWithImage = new PopupWithImage(".popup_type_photo");
 const popupDelCard = new PopupWithConfirmation(".popup_type_delete-card"); 
-
 const validAddForm = new FormValidator(cardPopup.popupForm, config);
 const validEditForm = new FormValidator(profilePopup.popupForm, config);
 const validAvatarForm = new FormValidator(avatarPopup.popupForm, config);
-
-// getUserData();
-// getInitialCards();
 
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
@@ -57,29 +51,43 @@ validAddForm.enableValidation();
 validAvatarForm.enableValidation();
 
 const createNewCard = (item) => {
-  const card = new Card (item, config.cardSelector, {
-    handlePhotoClick: () => {
-      popupWithImage.open(item);
-    },
-    handleCardLike: (cardId, like) => {
-      api.changeCardLikeState(cardId, like)
-        .then((res) => {
-          card.countLikes(res); 
-        })
-        .catch((err) => console.log(err))
-    },
-    handleDeleteCard(cardId) {
-      popupDelCard.open();
-      popupDelCard.submitDeleteCard(() => {
-        api.deleteCard(cardId)
-          .then(() => card.deleteCard())
+
+    const card = new Card (item, config.cardSelector, {
+      handlePhotoClick: () => {
+        popupWithImage.open(item);
+      },
+      handleCardLike: (cardId, like) => {
+        console.log(cardId, like);
+        api.changeCardLikeState(cardId, like)
+          .then((res) => {
+            card.countLikes(res);
+            card.toggleLike(); 
+          })
           .catch((err) => console.log(err))
-        popupDelCard.close();
-      });
-    },
-  });
-  const cardElement = card.generateCard();
-  return cardElement;
+      },
+      handleDeleteCard(cardId) {
+        popupDelCard.open();
+        popupDelCard.submitDeleteCard(() => {
+          api.deleteCard(cardId)
+            .then(() => card.deleteCard())
+            .catch((err) => console.log(err))
+          popupDelCard.close();
+        });
+      },
+
+      // getMyId: () => { return api.getUserInfo()
+      //   .then((result) => {
+      //     console.log(result._id);
+      //     return result._id; 
+      //   })
+      //   .catch((err) => console.log(err))
+      // }
+
+    }
+    );
+    const cardElement = card.generateCard();
+    return cardElement;
+
 };
 
 const cardList = new Section (

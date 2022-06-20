@@ -70,7 +70,19 @@ export class Api {
     })
       .then((res) => this._getResponseData(res))
     
-    // добавить запрос на изменение автара
+  };
+
+  editAvatar(avatarUrl) {
+    const body = {
+      avatar: avatarUrl
+    };
+
+    return fetch(`${this._url}/users/me/avatar`, {
+      headers: this._headers,
+      method: 'PATCH',
+      body: JSON.stringify(body),
+    })
+      .then((res) => this._getResponseData(res))
     
   };
 
