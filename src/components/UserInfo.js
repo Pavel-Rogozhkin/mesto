@@ -3,6 +3,7 @@ export class UserInfo {
   constructor({nameSelector, profileSelector}) {
     this._nameElement = document.querySelector(nameSelector);
     this._profileElement = document.querySelector(profileSelector);
+    // добавить обработку аватара
   };
 
   getUserinfo() {
