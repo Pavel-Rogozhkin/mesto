@@ -29,7 +29,7 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
-const api = new Api(API_URL, token);
+const api = new Api(API_URL, headers);
 
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
 
