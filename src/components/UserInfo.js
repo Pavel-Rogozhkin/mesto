@@ -6,6 +6,14 @@ export class UserInfo {
     // добавить обработку аватара
   };
 
+  setMyId(myId) {
+    this._myId = myId;
+  }
+
+  getMyId() {
+    return this._myId;
+  }
+
   getUserinfo() {
     return {
       name: this._nameElement.textContent,

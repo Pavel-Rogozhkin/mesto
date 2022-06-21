@@ -30,6 +30,17 @@ import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
 const api = new Api(API_URL, headers);
+
+Promise.all([api.getUserInfo()])
+  .then(([user]) => {
+      nameInput.value = user.name;
+      profileInput.value = user.about;
+      mainUser.setUserInfo({name: user.name, link: user.about});
+      avatar.src = user.avatar;
+      mainUser.setMyId(user._id);
+    })
+  .catch((err) => console.log(err));
+
 const mainUser = new UserInfo( { nameSelector, profileSelector } );
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
@@ -51,43 +62,34 @@ validAddForm.enableValidation();
 validAvatarForm.enableValidation();
 
 const createNewCard = (item) => {
-
-    const card = new Card (item, config.cardSelector, {
-      handlePhotoClick: () => {
-        popupWithImage.open(item);
-      },
-      handleCardLike: (cardId, like) => {
-        console.log(cardId, like);
-        api.changeCardLikeState(cardId, like)
-          .then((res) => {
-            card.countLikes(res);
-            card.toggleLike(); 
-          })
+  const myId = mainUser.getMyId();
+  const card = new Card (item, config.cardSelector, {
+    handlePhotoClick: () => {
+      popupWithImage.open(item);
+    },
+    handleCardLike: (cardId, like) => {
+      console.log(cardId, like);
+      api.changeCardLikeState(cardId, like)
+        .then((res) => {
+          card.countLikes(res);
+          card.toggleLike(); 
+        })
+        .catch((err) => console.log(err))
+    },
+    handleDeleteCard(cardId) {
+      popupDelCard.open();
+      popupDelCard.submitDeleteCard(() => {
+        api.deleteCard(cardId)
+          .then(() => card.deleteCard())
           .catch((err) => console.log(err))
-      },
-      handleDeleteCard(cardId) {
-        popupDelCard.open();
-        popupDelCard.submitDeleteCard(() => {
-          api.deleteCard(cardId)
-            .then(() => card.deleteCard())
-            .catch((err) => console.log(err))
-          popupDelCard.close();
-        });
-      },
-
-      // getMyId: () => { return api.getUserInfo()
-      //   .then((result) => {
-      //     console.log(result._id);
-      //     return result._id; 
-      //   })
-      //   .catch((err) => console.log(err))
-      // }
-
-    }
-    );
-    const cardElement = card.generateCard();
-    return cardElement;
-
+        popupDelCard.close();
+      });
+    },
+    myId: myId,
+  }
+  );
+  const cardElement = card.generateCard();
+  return cardElement;
 };
 
 const cardList = new Section (
@@ -100,13 +102,9 @@ const cardList = new Section (
   config.containerSelector
 );
 
-Promise.all([api.getUserInfo(), api.getCards()])
-  .then(([user, cards]) => {
-      nameInput.value = user.name;
-      profileInput.value = user.about;
-      mainUser.setUserInfo({name: user.name, link: user.about});
+Promise.all([api.getCards()])
+  .then(([cards]) => {
       cardList.renderItems(cards);
-      avatar.src = user.avatar;
     })
   .catch((err) => console.log(err));
 

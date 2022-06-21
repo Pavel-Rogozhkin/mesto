@@ -11,7 +11,7 @@ export class Card {
     this._handlePhotoElement = handlers.handlePhotoClick;
     this._handleCardLike = handlers.handleCardLike;
     this._handleDeleteCard = handlers.handleDeleteCard;
-    this._getMyId = handlers.getMyId;
+    this._myId = handlers.myId;
   }
 
   _renderMyLikes() {
@@ -73,7 +73,6 @@ export class Card {
   }
 
   generateCard() {
-    this._myId = this._getMyId();
     this.element = this._getTemplateElement();
     this._setEventListeners();
     if (this._owenerId !== this._myId){
