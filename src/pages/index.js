@@ -72,6 +72,8 @@ const createNewCard = (item) => {
       api.changeCardLikeState(cardId, like)
         .then((res) => {
           card.countLikes(res);
+        })
+        .then(() => {
           card.toggleLike(); 
         })
         .catch((err) => console.log(err))
