@@ -25,6 +25,15 @@ export class PopupWithForm extends Popup {
     });
   };
 
+  isLoading = (state, buttonSelector, loadedText = "Сохранить", loadingText = "Сохранение...") => {
+    let buttonText = document.querySelector(buttonSelector).textContent;
+    if (state) {
+      buttonText = loadedText;
+    } else {
+      buttonText = loadingText;
+    };
+  };
+
   close() {
     super.close();
     this.popupForm.reset();

@@ -109,34 +109,34 @@ Promise.all([api.getCards()])
   .catch((err) => console.log(err));
 
 function submitEditProfileHandler(item) {
-  isLoading(true, config.buttonSelector, profilePopup);
+  profilePopup.isLoading(true, config.buttonSelector, profilePopup);
   api.editUserInfo({name: item.name, about: item.link, avatar: item.avatar})
     .then((user) => {
       mainUser.setUserInfo(user);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      isLoading(false, config.buttonSelector, profilePopup);
+      profilePopup.isLoading(false, config.buttonSelector, profilePopup);
       profilePopup.close();
     })
 };
 
 function submitEditAvatarHandler(avatarUrl) {
-  isLoading(true, config.buttonSelector, avatarPopup);
+  avatarPopup.isLoading(true, config.buttonSelector, avatarPopup);
   api.editAvatar(avatarUrl)
     .then(() => { mainUser.setAvatar(avatarUrl);})
     .catch((err) => console.log(err))
     .finally(() => {
-      isLoading(false, config.buttonSelector, avatarPopup);
+      avatarPopup.isLoading(false, config.buttonSelector, avatarPopup);
       avatarPopup.close();
     })
 };
 
-function submitAddCardHandler() {
-  isLoading(true, config.buttonSelector, cardPopup);
+function submitAddCardHandler(item) {
+  cardPopup.isLoading(true, config.buttonSelector, cardPopup);
   const newCard = {
-    name: titleInput.value,
-    link: linkInput.value
+    name: item.name,
+    link: item.link,
   };
   api.addCard(newCard)
     .then((newCard) => {
@@ -144,39 +144,25 @@ function submitAddCardHandler() {
       cardList.addItem(newCardElement);
     })
     .finally(() => {
-      isLoading(false, config.buttonSelector, cardPopup);
+      cardPopup.isLoading(false, config.buttonSelector, cardPopup);
       cardPopup.close();
     })
 };
 
 buttonEdit.addEventListener("click", () => {
-  api.getUserInfo()
-    .then((user) => {
-      mainUser.setUserInfo(user);
-    });
+  // api.getUserInfo()
+  //   .then((user) => {
+  //     mainUser.setUserInfo(user);
+  //   });
   profilePopup.open();
 });
 
 buttonAdd.addEventListener("click", () => {
-  popupAddForm.reset();
   validAddForm.toggleButton();
   cardPopup.open();
 });
 
 avatarClick.addEventListener("click", () => {
-  api.getUserInfo()
-    .then((user) => {
-      mainUser.setUserInfo(user);
-    });
   validAvatarForm.toggleButton();
   avatarPopup.open();
 });
-
-const isLoading = (state, buttonSelector, loadedText = "Сохранить", loadingText = "Сохранение...") => {
-  let buttonText = document.querySelector(buttonSelector).textContent;
-  if (state) {
-    buttonText = loadedText;
-  } else {
-    buttonText = loadingText;
-  };
-};
