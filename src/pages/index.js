@@ -117,8 +117,8 @@ function submitEditProfileHandler(item) {
     .catch((err) => console.log(err))
     .finally(() => {
       isLoading(false, config.buttonSelector, profilePopup);
+      profilePopup.close();
     })
-  profilePopup.close();
 };
 
 function submitEditAvatarHandler(avatarUrl) {
@@ -128,8 +128,8 @@ function submitEditAvatarHandler(avatarUrl) {
     .catch((err) => console.log(err))
     .finally(() => {
       isLoading(false, config.buttonSelector, avatarPopup);
+      avatarPopup.close();
     })
-  avatarPopup.close();
 };
 
 function submitAddCardHandler() {
@@ -145,8 +145,8 @@ function submitAddCardHandler() {
     })
     .finally(() => {
       isLoading(false, config.buttonSelector, cardPopup);
+      cardPopup.close();
     })
-  cardPopup.close();
 };
 
 buttonEdit.addEventListener("click", () => {
@@ -179,5 +179,4 @@ const isLoading = (state, buttonSelector, loadedText = "Сохранить", loa
   } else {
     buttonText = loadingText;
   };
-  
 };
