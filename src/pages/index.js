@@ -7,11 +7,8 @@ import {
   profileSelector,
   buttonEdit,
   buttonAdd,
-  popupAddForm,
   nameInput,
   profileInput,
-  titleInput,
-  linkInput,
   token,
   avatarSelector,
   avatarClick,
@@ -150,10 +147,9 @@ function submitAddCardHandler(item) {
 };
 
 buttonEdit.addEventListener("click", () => {
-  // api.getUserInfo()
-  //   .then((user) => {
-  //     mainUser.setUserInfo(user);
-  //   });
+  nameInput.textContent = document.querySelector(nameSelector).textContent;
+  profileInput.textContent = document.querySelector(profileSelector).textContent;
+  validEditForm.toggleButton();
   profilePopup.open();
 });
 
