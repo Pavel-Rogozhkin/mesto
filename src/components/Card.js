@@ -25,15 +25,14 @@ export class Card {
   };
 
   isLikeMine() {
-    console.log(this._likes);
     const likeCheck = this._likes.some((like) => {
-      like._id === this._myId;
-      // console.log(like._id === this._myId);
+      return like._id === this._myId;
     });
     return likeCheck;
   }
 
   countLikes(res) {
+    this._likes = res.likes;
     this._likeCount.textContent = res.likes.length;
   }
 
