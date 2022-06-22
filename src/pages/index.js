@@ -13,7 +13,7 @@ import {
   titleInput,
   linkInput,
   token,
-  avatar,
+  avatarSelector,
   avatarClick,
   API_URL,
 } from "../utils/constants.js";
@@ -35,13 +35,12 @@ Promise.all([api.getUserInfo()])
   .then(([user]) => {
       nameInput.value = user.name;
       profileInput.value = user.about;
-      mainUser.setUserInfo({name: user.name, link: user.about});
-      avatar.src = user.avatar;
+      mainUser.setUserInfo({name: user.name, about: user.about, avatar: user.avatar});
       mainUser.setMyId(user._id);
     })
   .catch((err) => console.log(err));
 
-const mainUser = new UserInfo( { nameSelector, profileSelector } );
+const mainUser = new UserInfo( { nameSelector, profileSelector, avatarSelector } );
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
 const avatarPopup = new PopupWithForm(".popup_type_edit-avatar", submitEditAvatarHandler);
@@ -111,17 +110,25 @@ Promise.all([api.getCards()])
 
 function submitEditProfileHandler(item) {
   isLoading(true, config.buttonSelector, profilePopup);
-  api.editUserInfo({name: item.name, about: item.link})
+  api.editUserInfo({name: item.name, about: item.link, avatar: item.avatar})
+    .then((user) => {
+      mainUser.setUserInfo(user);
+    })
     .catch((err) => console.log(err))
     .finally(() => {
       isLoading(false, config.buttonSelector, profilePopup);
     })
-  mainUser.setUserInfo(item);
   profilePopup.close();
 };
 
 function submitEditAvatarHandler(avatarUrl) {
-  avatar.src = avatarUrl.name;
+  isLoading(true, config.buttonSelector, avatarPopup);
+  api.editAvatar(avatarUrl)
+    .then(() => { mainUser.setAvatar(avatarUrl);})
+    .catch((err) => console.log(err))
+    .finally(() => {
+      isLoading(false, config.buttonSelector, avatarPopup);
+    })
   avatarPopup.close();
 };
 
@@ -145,8 +152,7 @@ function submitAddCardHandler() {
 buttonEdit.addEventListener("click", () => {
   api.getUserInfo()
     .then((user) => {
-      nameInput.value = user.name;
-      profileInput.value = user.about;
+      mainUser.setUserInfo(user);
     });
   profilePopup.open();
 });
@@ -158,6 +164,11 @@ buttonAdd.addEventListener("click", () => {
 });
 
 avatarClick.addEventListener("click", () => {
+  api.getUserInfo()
+    .then((user) => {
+      mainUser.setUserInfo(user);
+    });
+  validAvatarForm.toggleButton();
   avatarPopup.open();
 });
 

@@ -74,7 +74,7 @@ export class Api {
 
   editAvatar(avatarUrl) {
     const body = {
-      avatar: avatarUrl
+      avatar: avatarUrl.name
     };
 
     return fetch(`${this._url}/users/me/avatar`, {

@@ -1,9 +1,9 @@
 export class UserInfo {
 
-  constructor({nameSelector, profileSelector}) {
+  constructor( { nameSelector, profileSelector, avatarSelector } ) {
     this._nameElement = document.querySelector(nameSelector);
     this._profileElement = document.querySelector(profileSelector);
-    // добавить обработку аватара
+    this._avatar = document.querySelector(avatarSelector);
   };
 
   setMyId(myId) {
@@ -14,16 +14,22 @@ export class UserInfo {
     return this._myId;
   }
 
+  setAvatar(avatarUrl) {
+    this._avatar.src = avatarUrl.name;
+  }
+
   getUserinfo() {
     return {
       name: this._nameElement.textContent,
-      profile: this._profileElement.textContent,
+      about: this._profileElement.textContent,
+      avatar: this._avatar.src,
     }
   };
 
   setUserInfo(item) {
     this._nameElement.textContent = item.name;
-    this._profileElement.textContent = item.link;
+    this._profileElement.textContent = item.about;
+    this._avatar.src = item.avatar;
   };
 
 };
