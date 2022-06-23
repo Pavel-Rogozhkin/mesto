@@ -105,7 +105,7 @@ Promise.all([api.getCards()])
 
 function submitEditProfileHandler(item) {
   profilePopup.isLoading(true, config.buttonSelector, profilePopup);
-  api.editUserInfo({name: item.name, about: item.link, avatar: item.avatar})
+  api.editUserInfo({name: item.name, about: item.link})
     .then((user) => {
       mainUser.setUserInfo(user);
     })
