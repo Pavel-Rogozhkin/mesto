@@ -30,8 +30,7 @@ const api = new Api(API_URL, headers);
 
 Promise.all([api.getUserInfo()])
   .then(([user]) => {
-      nameInput.value = user.name;
-      profileInput.value = user.about;
+
       mainUser.setUserInfo({name: user.name, about: user.about, avatar: user.avatar});
       mainUser.setMyId(user._id);
     })
