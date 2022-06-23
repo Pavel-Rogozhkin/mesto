@@ -99,7 +99,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
 
 
 function submitEditProfileHandler(item) {
-  profilePopup.isLoading(true, config.buttonSelector, profilePopup);
+  profilePopup.isLoading(false);
   api.editUserInfo({name: item.name, about: item.link})
     .then((user) => {
       mainUser.setUserInfo(user);
@@ -107,13 +107,13 @@ function submitEditProfileHandler(item) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      profilePopup.isLoading(false, config.buttonSelector, profilePopup);
+      profilePopup.isLoading(true);
 
     })
 };
 
 function submitEditAvatarHandler(avatarUrl) {
-  avatarPopup.isLoading(true, config.buttonSelector, avatarPopup);
+  avatarPopup.isLoading(false);
   api.editAvatar(avatarUrl)
     .then(() => {
       mainUser.setAvatar(avatarUrl);
@@ -121,12 +121,12 @@ function submitEditAvatarHandler(avatarUrl) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      avatarPopup.isLoading(false, config.buttonSelector, avatarPopup);
+      avatarPopup.isLoading(true);
     })
 };
 
 function submitAddCardHandler(item) {
-  cardPopup.isLoading(true, config.buttonSelector, cardPopup);
+  cardPopup.isLoading(false, "Создать", "Создание...");
   const newCard = {
     name: item.name,
     link: item.link,
@@ -139,7 +139,7 @@ function submitAddCardHandler(item) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      cardPopup.isLoading(false, config.buttonSelector, cardPopup);
+      cardPopup.isLoading(true, "Создать", "Создание...");
     })
 };
 

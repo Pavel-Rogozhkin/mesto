@@ -26,7 +26,7 @@ export class PopupWithForm extends Popup {
     });
   };
 
-  isLoading = (state, buttonSelector, loadedText = "Сохранить", loadingText = "Сохранение...") => {
+  isLoading = (state, loadedText = "Сохранить", loadingText = "Сохранение...") => {
     if (state) {
       this._submitButton.textContent = loadedText;
     } else {
