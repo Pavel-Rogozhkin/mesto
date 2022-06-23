@@ -27,15 +27,6 @@ import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
 const api = new Api(API_URL, headers);
-
-Promise.all([api.getUserInfo()])
-  .then(([user]) => {
-
-      mainUser.setUserInfo({name: user.name, about: user.about, avatar: user.avatar});
-      mainUser.setMyId(user._id);
-    })
-  .catch((err) => console.log(err));
-
 const mainUser = new UserInfo( { nameSelector, profileSelector, avatarSelector } );
 const cardPopup = new PopupWithForm(".popup_type_add", submitAddCardHandler);
 const profilePopup = new PopupWithForm(".popup_type_edit", submitEditProfileHandler);
@@ -98,11 +89,14 @@ const cardList = new Section (
   config.containerSelector
 );
 
-Promise.all([api.getCards()])
-  .then(([cards]) => {
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([user, cards]) => {
+      mainUser.setUserInfo({name: user.name, about: user.about, avatar: user.avatar});
+      mainUser.setMyId(user._id);
       cardList.renderItems(cards);
     })
   .catch((err) => console.log(err));
+
 
 function submitEditProfileHandler(item) {
   profilePopup.isLoading(true, config.buttonSelector, profilePopup);
