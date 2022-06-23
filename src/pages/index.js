@@ -75,9 +75,11 @@ const createNewCard = (item) => {
       popupDelCard.open();
       popupDelCard.submitDeleteCard(() => {
         api.deleteCard(cardId)
-          .then(() => card.deleteCard())
+          .then(() => {
+            card.deleteCard();
+            popupDelCard.close();
+          })
           .catch((err) => console.log(err))
-        popupDelCard.close();
       });
     },
     myId: myId,
@@ -108,22 +110,25 @@ function submitEditProfileHandler(item) {
   api.editUserInfo({name: item.name, about: item.link})
     .then((user) => {
       mainUser.setUserInfo(user);
+      profilePopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       profilePopup.isLoading(false, config.buttonSelector, profilePopup);
-      profilePopup.close();
+
     })
 };
 
 function submitEditAvatarHandler(avatarUrl) {
   avatarPopup.isLoading(true, config.buttonSelector, avatarPopup);
   api.editAvatar(avatarUrl)
-    .then(() => { mainUser.setAvatar(avatarUrl);})
+    .then(() => {
+      mainUser.setAvatar(avatarUrl);
+      avatarPopup.close();
+    })
     .catch((err) => console.log(err))
     .finally(() => {
       avatarPopup.isLoading(false, config.buttonSelector, avatarPopup);
-      avatarPopup.close();
     })
 };
 
@@ -137,11 +142,11 @@ function submitAddCardHandler(item) {
     .then((newCard) => {
       const newCardElement = createNewCard(newCard);
       cardList.addItem(newCardElement);
+      cardPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       cardPopup.isLoading(false, config.buttonSelector, cardPopup);
-      cardPopup.close();
     })
 };
 
