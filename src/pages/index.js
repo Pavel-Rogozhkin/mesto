@@ -67,11 +67,9 @@ const createNewCard = (item) => {
       api.changeCardLikeState(cardId, like)
         .then((res) => {
           card.countLikes(res);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
           card.toggleLike(); 
         })
+        .catch((err) => console.log(err))
     },
     handleDeleteCard(cardId) {
       popupDelCard.open();
