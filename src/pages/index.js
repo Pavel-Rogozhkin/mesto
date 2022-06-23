@@ -147,8 +147,8 @@ function submitAddCardHandler(item) {
 };
 
 buttonEdit.addEventListener("click", () => {
-  nameInput.textContent = document.querySelector(nameSelector).textContent;
-  profileInput.textContent = document.querySelector(profileSelector).textContent;
+  nameInput.value = mainUser.getUserinfo().name;
+  profileInput.value = mainUser.getUserinfo().about;
   validEditForm.toggleButton();
   profilePopup.open();
 });
