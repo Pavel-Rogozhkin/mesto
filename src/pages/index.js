@@ -138,6 +138,7 @@ function submitAddCardHandler(item) {
       const newCardElement = createNewCard(newCard);
       cardList.addItem(newCardElement);
     })
+    .catch((err) => console.log(err))
     .finally(() => {
       cardPopup.isLoading(false, config.buttonSelector, cardPopup);
       cardPopup.close();
